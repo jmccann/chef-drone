@@ -8,4 +8,4 @@ version          '0.1.0'
 
 depends 'docker'
 
-supports 'ubuntu', '~> 13.04'
+supports 'ubuntu', '>= 12.04'

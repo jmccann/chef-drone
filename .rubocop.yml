@@ -1,0 +1,5 @@
+AlignParameters:
+  Enabled: false
+
+StringLiterals:
+  Enabled: false

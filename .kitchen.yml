@@ -1,4 +1,10 @@
 ---
+driver_plugin: vagrant
+
+driver_config:
+  customize:
+    memory: 1024
+
 driver:
   name: vagrant
 
@@ -6,11 +12,28 @@ provisioner:
   name: chef_solo
 
 platforms:
-  - name: ubuntu-12.04
-  - name: centos-6.4
+- name: ubuntu-12.04
+  driver_config:
+    box: opscode-ubuntu-12.04
+    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box
+    require_chef_omnibus: latest
+- name: ubuntu-12.10
+  driver_config:
+    box: opscode-ubuntu-12.10
+    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.10_chef-provisionerless.box
+    require_chef_omnibus: latest
+- name: ubuntu-13.04
+  driver_config:
+    box: opscode-ubuntu-13.04
+    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-13.04_chef-provisionerless.box
+    require_chef_omnibus: latest
+- name: ubuntu-13.10
+  driver_config:
+    box: opscode-ubuntu-13.10
+    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-13.10_chef-provisionerless.box
+    require_chef_omnibus: latest
 
 suites:
   - name: default
     run_list:
       - recipe[drone::default]
-    attributes:
