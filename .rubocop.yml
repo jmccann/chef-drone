@@ -1,5 +1,8 @@
 AlignParameters:
   Enabled: false
 
+Encoding:
+  Enabled: false
+
 StringLiterals:
   Enabled: false
