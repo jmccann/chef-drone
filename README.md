@@ -1,4 +1,5 @@
 # Drone cookbook
+[![Build Status](https://travis-ci.org/justincampbell/chef-drone.png?branch=master)](https://travis-ci.org/justincampbell/chef-drone)
 
 Installs [Drone](https://github.com/drone/drone), a CI server built on [Docker](https://www.docker.io).
 
@@ -10,7 +11,10 @@ Installs [Drone](https://github.com/drone/drone), a CI server built on [Docker](
 
 ## Platforms
 
+* Ubuntu 12.04
+* Ubuntu 12.10
 * Ubuntu 13.04
+* Ubuntu 13.10 (Experimental)
 
 # Usage
 
