@@ -1,7 +1,14 @@
 require 'foodcritic'
 require 'rubocop/rake_task'
 
-task default: [:foodcritic, :rubocop]
+task ci: [:foodcritic, :rubocop]
+task default: :ci
 
-Rubocop::RakeTask.new
 FoodCritic::Rake::LintTask.new
+Rubocop::RakeTask.new
+
+unless ENV['CI']
+  require 'kitchen/rake_tasks'
+  Kitchen::RakeTasks.new
+  task(:default).enhance('kitchen:all')
+end
