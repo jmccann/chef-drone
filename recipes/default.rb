@@ -10,6 +10,18 @@ dpkg_package "drone" do
   action :install
 end
 
+template node['drone']['config_file'] do
+  source 'drone.conf.erb'
+  mode 0644
+  owner 'root'
+  group 'root'
+  variables({
+     droned_opts: node['drone']['droned_opts']
+  })
+  notifies :restart, 'service[drone]', :delayed
+end
+
 service "drone" do
-  action :start
+  provider Chef::Provider::Service::Upstart
+  action [:enable, :start]
 end
