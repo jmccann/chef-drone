@@ -10,5 +10,5 @@ Rubocop::RakeTask.new
 unless ENV['CI']
   require 'kitchen/rake_tasks'
   Kitchen::RakeTasks.new
-  task(:default).enhance('kitchen:all')
+  task(:default).enhance(['kitchen:all'])
 end
