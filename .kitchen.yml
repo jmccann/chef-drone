@@ -37,3 +37,10 @@ suites:
   - name: default
     run_list:
       - recipe[drone::default]
+  - name: mysql
+    run_list:
+      - recipe[drone::default]
+    attributes:
+      drone:
+        droned_opts:
+          driver: mysql
