@@ -1,4 +1,15 @@
-include_recipe "mysql::client"
+
+# if ubuntu need apt-get update run at compiletime for mysql install
+case node["platform"] 
+when "debian", "ubuntu"
+  execute "compile-time-apt-get-update" do 
+    command "apt-get update" 
+    ignore_failure true 
+    action :nothing 
+  end.run_action(:run) 
+end
+
+include_recipe 'mysql::client'
 
 if node['drone']['mysql']['install']
   include_recipe "mysql::server"
@@ -9,6 +20,14 @@ if node['drone']['mysql']['install']
     username: 'root',
     password: node['mysql']['server_root_password']
   }
+
+template '/etc/mysql/conf.d/drone.cnf' do
+    source 'drone_mysql.cnf.erb'
+    mode 0644
+    owner 'root'
+    group 'root'
+    notifies :restart, 'service[mysql]', :delayed
+  end
 
   database 'create drone database' do
     connection mysql_connection_info
@@ -24,7 +43,7 @@ if node['drone']['mysql']['install']
     password      node['drone']['mysql']['password']
     database_name node['drone']['mysql']['database']
     host          '%'
-    privileges    [:select, :update, :insert]
+    privileges    [:select, :update, :insert, :create, :index]
     action        [:grant]
   end
 
@@ -35,7 +54,7 @@ if node['drone']['mysql']['install']
     password      node['drone']['mysql']['password']
     database_name node['drone']['mysql']['database']
     host          'localhost'
-    privileges    [:select, :update, :insert]
+    privileges    [:select, :update, :insert, :create, :index]
     action        [:grant]
   end
 

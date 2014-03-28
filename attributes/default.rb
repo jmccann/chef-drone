@@ -11,12 +11,15 @@ when 'sqlite3'
 when 'mysql' # not supported in drone ... yet.
   default['drone']['mysql']['install']  = true
   default['drone']['mysql']['host']     = 'localhost'
+  default['drone']['mysql']['port']     = 3306
   default['drone']['mysql']['database'] = 'drone'
   default['drone']['mysql']['username'] = 'drone'
   default['drone']['mysql']['password'] = 'drone'
-  dsn = node['drone']['mysql']['username']
+  dsn = node['drone']['mysql']['username'].clone
   dsn << ":#{node['drone']['mysql']['password']}"
-  dsn << "@#{node['drone']['mysql']['host']}"
-  dsn << "/#{node['drone']['mysql']['dbname']}"
+  dsn << "@tcp(#{node['drone']['mysql']['host']}"
+  dsn << ":#{node['drone']['mysql']['port']})"
+  dsn << "/#{node['drone']['mysql']['database']}"
+  dsn << '?parseTime=true'
   default['drone']['droned_opts']['datasource'] = dsn
 end

@@ -6,7 +6,7 @@ description      'Installs/Configures Drone'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.2.0'
 
-%w{ docker mysql database }.each do |dep|
+%w{ docker mysql database apt }.each do |dep|
   depends dep
 end
 
