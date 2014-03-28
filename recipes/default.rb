@@ -1,5 +1,7 @@
 include_recipe "docker"
 
+include_recipe "drone::_#{node['drone']['droned_opts']['driver']}"
+
 remote_file node['drone']['temp_file'] do
   source node['drone']['package_url']
   action :create_if_missing
@@ -10,13 +12,18 @@ dpkg_package "drone" do
   action :install
 end
 
+droned_opts = ''
+node['drone']['droned_opts'].each do |option, value|
+  droned_opts << "--#{option}=#{value} "
+end
+
 template node['drone']['config_file'] do
   source 'drone.conf.erb'
   mode 0644
   owner 'root'
   group 'root'
   variables(
-     droned_opts: node['drone']['droned_opts']
+     droned_opts: droned_opts
   )
   notifies :restart, 'service[drone]', :delayed
 end

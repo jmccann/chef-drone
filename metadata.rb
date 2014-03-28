@@ -6,6 +6,8 @@ description      'Installs/Configures Drone'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.2.0'
 
-depends 'docker'
+%w{ docker mysql database apt }.each do |dep|
+  depends dep
+end
 
 supports 'ubuntu', '>= 12.04'

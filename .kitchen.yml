@@ -37,3 +37,16 @@ suites:
   - name: default
     run_list:
       - recipe[drone::default]
+  - name: mysql
+    run_list:
+      - recipe[apt::default]
+      - recipe[drone::default]
+    attributes:
+      drone:
+        droned_opts:
+          driver: mysql
+      mysql:
+        server_debian_password: 'ilikesecurepasswords'
+        server_root_password: 'ilikesecurepasswords'
+        server_repl_password: 'ilikesecurepasswords'
+        bind_address: '0.0.0.0'
