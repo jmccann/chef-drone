@@ -3,6 +3,8 @@ start on (filesystem and net-device-up)
 chdir /var/lib/drone
 console log
 
+env DRONE_TMP=<%= default['drone']['drone_tmp'] %>
+
 script
     DRONED_OPTS="<%= @droned_opts %>"
     if [ -f /etc/default/$UPSTART_JOB ]; then
