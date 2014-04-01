@@ -37,3 +37,11 @@ suites:
   - name: default
     run_list:
       - recipe[drone::default]
+  - name: nginx
+    run_list:
+      - recipe[drone::default]
+      - recipe[drone::nginx]
+    attributes:
+      drone:
+        address: '127.0.0.1'
+        port: '5000'
