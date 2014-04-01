@@ -3,7 +3,7 @@ start on (filesystem and net-device-up)
 chdir /var/lib/drone
 console log
 
-env DRONE_TMP=<%= default['drone']['drone_tmp'] %>
+env DRONE_TMP=<%= @drone_tmp %>
 
 script
     DRONED_OPTS="<%= @droned_opts %>"

@@ -16,7 +16,8 @@ template node['drone']['config_file'] do
   owner 'root'
   group 'root'
   variables(
-     droned_opts: node['drone']['droned_opts']
+     droned_opts: node['drone']['droned_opts'],
+     drone_tmp:   node['drone']['drone_tmp']
   )
   notifies :restart, 'service[drone]', :delayed
 end
