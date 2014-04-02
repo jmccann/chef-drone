@@ -1,0 +1,52 @@
+server {
+  listen <%= @listen_address %>:<%= @listen_port %>;
+
+  server_name <%= @server_name %> <%= @server_aliases.join(" ") %>;
+  access_log <%= node['nginx']['log_dir'] %>/<%= @server_name %>.access.log;
+  return 301 https://<%= @ssl_listen_address %>:<%= @ssl_listen_port %>$request_uri;
+}
+
+server {
+  ### server port and name ###
+  listen <%= @ssl_listen_address %>:<%= @ssl_listen_port %>;
+  ssl on;
+  server_name <%= @server_name %> <%= @server_aliases.join(" ") %>;
+ 
+  ### SSL log files ###
+  access_log <%= node['nginx']['log_dir'] %>/<%= @server_name %>-ssl-access.log;
+  error_log  <%= node['nginx']['log_dir'] %>/<%= @server_name %>-ssl-error.log;
+
+  ### We want full access to SSL via backend ###
+    location / {
+    proxy_pass http://<%= @drone_address %>:<%= @drone_port %>;
+  }
+ 
+  ### SSL cert files ###
+  ssl_certificate      <%= @ssl_cert %>;
+  ssl_certificate_key  <%= @ssl_key %>;
+
+  ### Add SSL specific settings here ###
+ 
+  ssl_prefer_server_ciphers On;
+  ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS;
+  keepalive_timeout    60;
+  ssl_session_cache    shared:SSL:10m;
+  ssl_session_timeout  10m;
+
+  ### force timeouts if one of backend is died ##
+  proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+ 
+  ### Set headers ####
+  proxy_set_header        Accept-Encoding   "";
+  proxy_set_header        Host            $host;
+  proxy_set_header        X-Real-IP       $remote_addr;
+  proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+ 
+  ### Most PHP, Python, Rails, Java App can use this header ###
+  proxy_set_header        X-Forwarded-Proto $scheme;
+  add_header              Front-End-Https   on;
+ 
+  ### By default we don't want to redirect it ####
+  proxy_redirect     off;
+}

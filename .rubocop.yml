@@ -6,3 +6,6 @@ Encoding:
 
 StringLiterals:
   Enabled: false
+
+LineLength:
+  Max: 95

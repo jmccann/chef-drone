@@ -26,12 +26,13 @@ setup() {
   which nginx
 }
 
-@test "listening on 80,5000" {
+@test "listening on 80,443,5000" {
   nc -z localhost 5000
   nc -z localhost 80
+  nc -z localhost 443
 }
 
 @test "GET /install" {
-  curl localhost/install
+  curl -k https://localhost/install
   curl localhost:5000/install
 }
