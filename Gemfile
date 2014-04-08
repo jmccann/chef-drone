@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'berkshelf'
+gem 'emeril'
 gem 'foodcritic'
 gem 'rake'
 gem 'rubocop'
