@@ -7,7 +7,7 @@ setup() {
 }
 
 @test "droned installed" {
-  which drone
+  which droned
 }
 
 @test "drone running" {
