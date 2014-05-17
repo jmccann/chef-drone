@@ -6,6 +6,8 @@ description      'Installs/Configures Drone'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.3.1'
 
-depends 'docker'
+%w(docker nginx x509).each do |dep|
+  depends dep
+end
 
 supports 'ubuntu', '>= 12.04'

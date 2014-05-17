@@ -8,6 +8,7 @@ end
 dpkg_package "drone" do
   source node['drone']['temp_file']
   action :install
+  notifies :stop, 'service[drone]', :immediately
 end
 
 template node['drone']['config_file'] do
@@ -19,7 +20,7 @@ template node['drone']['config_file'] do
      droned_opts: node['drone']['droned_opts'],
      drone_tmp:   node['drone']['drone_tmp']
   )
-  notifies :restart, 'service[drone]', :delayed
+  notifies :restart, 'service[drone]'
 end
 
 service "drone" do
