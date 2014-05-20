@@ -3,6 +3,3 @@ AlignParameters:
 
 Encoding:
   Enabled: false
-
-StringLiterals:
-  Enabled: false
