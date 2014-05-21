@@ -19,18 +19,3 @@ end
 group :kitchen_cloud do
   gem 'kitchen-digitalocean'
 end
-
-group :development do
-  gem 'ruby_gntp'
-  gem 'growl'
-  gem 'rb-fsevent'
-  gem 'guard', '~> 2.4'
-  gem 'guard-kitchen'
-  gem 'guard-foodcritic'
-  gem 'guard-rspec'
-  gem 'guard-rubocop'
-  gem 'rake'
-  gem 'fauxhai'
-  gem 'pry-nav'
-  gem 'emeril'
-end
