@@ -3,7 +3,7 @@ setup() {
 }
 
 @test "drone installed" {
-  which drone
+  hash drone
 }
 
 @test "droned installed" {
