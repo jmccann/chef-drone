@@ -2,6 +2,10 @@ setup() {
   apt-get install curl -y
 }
 
+@test "drone installed" {
+  hash drone
+}
+
 @test "droned installed" {
   hash droned
 }
