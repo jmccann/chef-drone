@@ -2,10 +2,6 @@ setup() {
   apt-get install curl -y
 }
 
-@test "drone installed" {
-  which drone
-}
-
 @test "droned installed" {
   which droned
 }
