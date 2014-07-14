@@ -6,3 +6,7 @@ Encoding:
 
 StringLiterals:
   Enabled: false
+
+Style/SingleSpaceBeforeFirstArg:
+  Exclude:
+    - metadata.rb

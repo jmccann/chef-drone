@@ -6,7 +6,7 @@ task ci: [:foodcritic, :rubocop]
 task default: :ci
 
 FoodCritic::Rake::LintTask.new
-Rubocop::RakeTask.new
+RuboCop::RakeTask.new
 
 unless ENV['CI']
   require 'kitchen/rake_tasks'
