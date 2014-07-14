@@ -15,10 +15,10 @@ setup() {
 
 @test "droned process has --port=:443 flag" {
   run pgrep -fl -- --port=:443
-  echo "$output" | egrep "^[0-9]+ droned$"
+  echo "$output" | egrep "^[0-9]+ droned.*$"
 }
 
 @test "droned process has --workers=2 flag" {
   run pgrep -fl -- --port=:443
-  echo "$output" | egrep "^[0-9]+ droned$"
+  echo "$output" | egrep "^[0-9]+ droned.*$"
 }
