@@ -7,6 +7,7 @@ gem 'rake'
 gem 'rubocop'
 
 group :integration do
+  gem 'serverspec'
   gem 'kitchen-vagrant'
   gem 'test-kitchen'
 end
