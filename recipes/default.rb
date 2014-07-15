@@ -12,7 +12,7 @@ end
 
 template 'drone.conf' do
   source 'drone.conf.erb'
-  path "#{node['drone']['config_file']}"
+  path node['drone']['config_file']
   mode 0644
   owner 'root'
   group 'root'
