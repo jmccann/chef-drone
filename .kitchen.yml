@@ -4,6 +4,7 @@ driver_plugin: vagrant
 driver_config:
   customize:
     memory: 1024
+  require_chef_omnibus: latest
 
 driver:
   name: vagrant
