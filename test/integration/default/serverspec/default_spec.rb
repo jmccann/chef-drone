@@ -1,7 +1,6 @@
 require_relative 'spec_helper'
 
 describe 'Drone CI server' do
-
   it 'should install drone' do
     expect(file '/usr/local/bin/drone').to be_file
     expect(file '/usr/local/bin/drone').to be_executable
@@ -23,6 +22,8 @@ describe 'Drone CI server' do
 
   # Ubuntu image doesn't doesn't have cURL by default but wget can be used.
   it 'should respond to HTTP request' do
-    expect(command 'wget -q --spider http://localhost/install' ).to return_exit_status 0
+    expect(
+      command('wget -q --spider http://localhost/install')
+    ).to return_exit_status(0)
   end
 end

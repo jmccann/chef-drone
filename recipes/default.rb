@@ -26,9 +26,8 @@ end
 
 service "drone" do
   provider Chef::Provider::Service::Upstart
-  supports :status => true, :restart => true
+  supports status: true, restart: true
   action [:enable, :start]
   restart_command 'service drone restart'
   subscribes :restart, "drone.conf", :immediately
 end
-
