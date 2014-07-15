@@ -27,3 +27,5 @@ suites:
     attributes:
       drone:
         droned_opts: --port=:443 --workers=2
+    includes:
+      - ubuntu-14.04
