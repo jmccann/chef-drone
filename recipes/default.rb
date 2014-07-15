@@ -21,7 +21,7 @@ template 'drone.conf' do
      drone_tmp:   node['drone']['drone_tmp']
   )
 
-  notifies :restart, "service[drone]", :immediately
+  notifies :restart, "service[drone]", :delayed
 end
 
 service "drone" do
