@@ -1,33 +1,6 @@
-include_recipe "docker"
+include_recipe 'docker::default'
 
-remote_file node['drone']['temp_file'] do
-  source node['drone']['package_url']
-  action :create_if_missing
-end
+install_type = node['drone']['install_type']
+include_recipe "drone::install_#{install_type}"
 
-dpkg_package "drone" do
-  source node['drone']['temp_file']
-  action :install
-end
-
-template 'drone.conf' do
-  source 'drone.conf.erb'
-  path node['drone']['config_file']
-  mode 0644
-  owner 'root'
-  group 'root'
-  variables(
-     droned_opts: node['drone']['droned_opts'],
-     drone_tmp:   node['drone']['drone_tmp']
-  )
-
-  notifies :restart, "service[drone]", :delayed
-end
-
-service "drone" do
-  provider Chef::Provider::Service::Upstart
-  supports status: true, restart: true
-  action [:enable, :start]
-  restart_command 'service drone restart'
-  subscribes :restart, "drone.conf", :immediately
-end
+include_recipe 'drone::_service'

@@ -1,6 +1,11 @@
 Drone Cookbook Changelog
 =========================
 
+v0.5.0
+------
+* Refactor default recipe into separate source/package installations.
+* Add ChefSpec unit tests for recipes.
+
 v0.4.0
 ------
 

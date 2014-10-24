@@ -13,6 +13,8 @@ provisioner:
   name: chef_zero
 
 platforms:
+  - name: centos-7.0
+  - name: centos-6.5
   - name: ubuntu-12.04
   - name: ubuntu-13.10
   - name: ubuntu-14.04

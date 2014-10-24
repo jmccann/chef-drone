@@ -8,6 +8,7 @@ gem 'rubocop'
 
 group :integration do
   gem 'serverspec'
+  gem 'chefspec'
   gem 'kitchen-vagrant'
   gem 'test-kitchen'
 end
