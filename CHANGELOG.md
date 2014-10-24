@@ -5,6 +5,8 @@ v0.5.0
 ------
 * Configure Drone with TOML (Graham Weldon)
 * Use new Drone package URL (Ke Zhu)
+* Refactor default recipe into separate source/package installations.
+* Add ChefSpec unit tests for recipes.
 
 v0.4.0
 ------

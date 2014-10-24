@@ -15,9 +15,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe 'docker::default'
+include_recipe 'golang::default'
 
-install_type = node['drone']['install_type']
-include_recipe "drone::install_#{install_type}"
+directory File.join(node['go']['gopath'], 'src/github.com/drone') do
+  owner 'root'
+  group 'root'
+  mode '00755'
+  recursive true
+end
 
-include_recipe 'drone::_service'
+git File.join(node['go']['gopath'], '/src/github.com/drone/drone') do
+  repository node['drone']['git_url']
+  reference node['drone']['git_ref']
+  action :checkout
+end
+
+golang_package 'github.com/drone/drone' do
+  action :install
+end
+
+link File.join(node['drone']['install_dir'], 'drone') do
+  to File.join(node['go']['gobin'], 'drone')
+end
