@@ -1,10 +1,4 @@
 require 'serverspec'
+require 'specinfra'
 
-include Serverspec::Helper::Exec
-include Serverspec::Helper::DetectOS
-
-RSpec.configure do |c|
-  c.before :all do
-    c.path = '/sbin:/usr/bin'
-  end
-end
+set :backend, :exec
