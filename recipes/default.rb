@@ -41,5 +41,5 @@ service "drone" do
   action [:enable, :start]
   restart_command 'service drone restart'
   subscribes :restart, "template[drone.conf]", :immediately
-  subscribes :restart, "file[#{node['drone']['toml_config_file']}]", :immediately
+  subscribes :restart, "file[#{node['drone']['toml_file']}]", :immediately
 end
