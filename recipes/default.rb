@@ -1,5 +1,3 @@
-chef_gem 'toml'
-
 include_recipe "docker"
 
 remote_file node['drone']['temp_file'] do
@@ -26,7 +24,10 @@ template 'drone.conf' do
   notifies :restart, "service[drone]", :delayed
 end
 
-toml_string = TOML::Generator.new(node['drone']['config']).body
+chef_gem 'toml'
+require 'toml'
+toml_string = ::TOML::Generator.new(node['drone']['config']).body
+
 file node['drone']['toml_config_file'] do
   mode 0644
   action :create

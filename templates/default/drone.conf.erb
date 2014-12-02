@@ -3,12 +3,6 @@ start on (filesystem and net-device-up)
 chdir /var/lib/drone
 console log
 
-env DRONE_TMP=<%= @drone_tmp %>
-
 script
-    DRONED_OPTS="<%= @droned_opts %>"
-    if [ -f /etc/default/$UPSTART_JOB ]; then
-        . /etc/default/$UPSTART_JOB
-    fi
-    droned $DRONED_OPTS
+	/usr/local/bin/droned --config=/etc/drone/drone.toml
 end script
