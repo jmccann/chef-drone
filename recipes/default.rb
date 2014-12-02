@@ -1,3 +1,5 @@
+chef_gem 'toml'
+
 include_recipe "docker"
 
 remote_file node['drone']['temp_file'] do
@@ -24,10 +26,19 @@ template 'drone.conf' do
   notifies :restart, "service[drone]", :delayed
 end
 
+toml_string = TOML::Generator.new(node['drone']['config']).body
+file node['drone']['toml_config_file'] do
+  mode 0644
+  action :create
+  content toml_string
+  notifies :restart, "service[drone]", :delayed
+end
+
 service "drone" do
   provider Chef::Provider::Service::Upstart
   supports status: true, restart: true
   action [:enable, :start]
   restart_command 'service drone restart'
-  subscribes :restart, "drone.conf", :immediately
+  subscribes :restart, "template[drone.conf]", :immediately
+  subscribes :restart, "file[#{node['drone']['toml_config_file']}]", :immediately
 end

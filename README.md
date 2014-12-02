@@ -34,6 +34,81 @@ package_url | URL of the Drone package to download and install | String | [http:
 temp_file | Path to store the downloaded package | String | /tmp/drone.deb
 config_file | Location of Drone config file | String | /etc/init/drone.conf
 droned_opts | Options to use when running Drone | String | --port=:80
+config | Hash of configuration options | Hash | See Config section below
+
+# Configuration
+
+The configuration is defined as a hash, and converted to TOML format for drone's configuration.
+
+The default configuration is minimal:
+
+	default['drone']['config'] = {
+	  'server' => {
+	    'port' => ':80',
+	  },
+	  'database' => {
+	    'driver' => 'sqlite3',
+	    'datasource' => '/var/lib/drone/drone.sqlite'
+	  },
+	  'registration' => {
+	    'open' => true
+	  }
+	}
+
+There are many more configuration options that you can specify, and the complete config is shown below:
+
+	default['drone']['config'] = {
+	  'server' => {
+	    'port' => ':80',
+	    'ssl' => {
+	      'key' => '',
+	      'cert' => ''
+	    }
+	  },
+	  'session' => {
+	    'secret' => '',
+	    'expires' => ''
+	  },
+	  'database' => {
+	    'driver' => 'sqlite3',
+	    'datasource' => '/var/lib/drone/drone.sqlite'
+	  },
+	  'registration' => {
+	    'open' => true
+	  },
+	  'github' => {
+	    'client' => '',
+	    'secret' => ''
+	  },
+	  'github_enterprise' => {
+	    'client' => '',
+	    'secret' => '',
+	    'api' => '',
+	    'url' => '',
+	    'private_mode' => false
+	  },
+	  'bitbucket' => {
+	    'client' => '',
+	    'secret' => ''
+	  },
+	  'gitlab' => {
+	    'url' => ''
+	  },
+	  'smtp' => {
+	    'host' => '',
+	    'port' => '',
+	    'from' => '',
+	    'user' => '',
+	    'pass' => ''
+	  },
+	  'worker' => {
+	    'cert' => '',
+	    'key' => '',
+	    'nodes' => [
+	      'unix:///var/run/docker.sock'
+	    ]
+	  }
+	}
 
 # Recipes
 
