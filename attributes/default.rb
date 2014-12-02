@@ -6,7 +6,7 @@ default['drone']['drone_tmp'] = '/tmp/drone'
 default['drone']['toml_config_file'] = '/etc/drone/drone.toml'
 default['drone']['config'] = {
   'server' => {
-    'port' => ':80',
+    'port' => ':80'
   },
   'database' => {
     'driver' => 'sqlite3',
