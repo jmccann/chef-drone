@@ -28,7 +28,7 @@ chef_gem 'toml'
 require 'toml'
 toml_string = ::TOML::Generator.new(node['drone']['config']).body
 
-file node['drone']['toml_config_file'] do
+file node['drone']['toml_file'] do
   mode 0644
   action :create
   content toml_string
