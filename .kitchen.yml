@@ -21,11 +21,15 @@ suites:
   - name: default
     run_list:
       - recipe[drone::default]
-  - name: droned_opts
+  - name: config
     run_list:
       - recipe[drone::default]
     attributes:
       drone:
-        droned_opts: --port=:443 --workers=2
-    includes:
-      - ubuntu-14.04
+        config:
+          server:
+            port: ':443'
+          worker:
+            nodes:
+              - "unix:///var/run/docker.sock"
+              - "unix:///var/run/docker.sock"

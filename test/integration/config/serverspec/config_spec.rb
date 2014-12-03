@@ -1,19 +1,17 @@
 require_relative 'spec_helper'
 
-describe 'Drone with custom runtime flags/options' do
-  it 'should have correct port setting' do
-    expect(file('/etc/drone/drone.toml').to match(/port: ":443"/))
-    #expect(process('droned').args).to match(/--port=:443\b/)
+describe 'Drone with custom configuration' do
+
+  describe file('/etc/drone/drone.toml') do
+    its(:content) { should match /port = ":443"/ }
   end
 
-  it 'should be listening on port 443' do
-    expect(port 443).to be_listening
+  describe port(443) do
+    it { should be_listening }
   end
 
   # Ubuntu image doesn't doesn't have cURL by default but wget can be used.
-  it 'should respond to HTTP request' do
-    expect(
-      command('wget -q --spider localhost:443/install')
-    ).to return_exit_status(0)
+  describe command('wget -q --spider localhost:443/install') do
+    its(:exit_status) { should eq 0 }
   end
 end

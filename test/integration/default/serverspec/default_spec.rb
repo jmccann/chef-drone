@@ -15,16 +15,15 @@ describe 'Drone CI server' do
   end
 
   describe file('/var/lib/drone/drone.sqlite') do
-    it { should exist }
+    it { should be_file }
   end
 
-  it 'should be listening on port 80' do
-    expect(port 80).to be_listening
+  describe port(80) do
+    it { should be_listening }
   end
 
   # Ubuntu image doesn't doesn't have cURL by default but wget can be used.
-  it 'should respond to HTTP request' do
-    result = command('wget -q --spider http://localhost/install')
-    expect(result.exit_status).to eq(0)
+  describe command('wget -q --spider localhost/install') do
+    its(:exit_status) { should eq 0 }
   end
 end
