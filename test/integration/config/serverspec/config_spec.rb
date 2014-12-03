@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 describe 'Drone with custom configuration' do
 
   describe file('/etc/drone/drone.toml') do
-    its(:content) { should match /port = ":443"/ }
+    its(:content) { should match(/port = ":443"/) }
   end
 
   describe port(443) do
