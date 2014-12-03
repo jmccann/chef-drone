@@ -14,6 +14,10 @@ describe 'Drone CI server' do
     it { should be_running }
   end
 
+  describe file('/var/lib/drone/drone.sqlite') do
+    it { should exist }
+  end
+
   it 'should be listening on port 80' do
     expect(port 80).to be_listening
   end

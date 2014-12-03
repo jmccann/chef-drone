@@ -1,12 +1,9 @@
 require_relative 'spec_helper'
 
 describe 'Drone with custom runtime flags/options' do
-  it 'should have correct --port flag' do
-    expect(process('droned').args).to match(/--port=:443\b/)
-  end
-
-  it 'should have correct --workers flag' do
-    expect(process('droned').args).to match(/--workers=2\b/)
+  it 'should have correct port setting' do
+    expect(file('/etc/drone/drone.toml').to match(/port: ":443"/))
+    #expect(process('droned').args).to match(/--port=:443\b/)
   end
 
   it 'should be listening on port 443' do
