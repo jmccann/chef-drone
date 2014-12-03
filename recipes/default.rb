@@ -16,11 +16,6 @@ template 'drone.conf' do
   mode 0644
   owner 'root'
   group 'root'
-  variables(
-     droned_opts: node['drone']['droned_opts'],
-     drone_tmp:   node['drone']['drone_tmp']
-  )
-
   notifies :restart, "service[drone]", :delayed
 end
 

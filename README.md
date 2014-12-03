@@ -33,7 +33,6 @@ Attribute | Description | Type | Default
 package_url | URL of the Drone package to download and install | String | [http://downloads.drone.io/master/drone.deb](http://downloads.drone.io/master/drone.deb)
 temp_file | Path to store the downloaded package | String | /tmp/drone.deb
 config_file | Location of Drone config file | String | /etc/init/drone.conf
-droned_opts | Options to use when running Drone | String | --port=:80
 config | Hash of configuration options | Hash | See Config section below
 
 # Configuration
