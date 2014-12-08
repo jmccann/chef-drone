@@ -1,6 +1,11 @@
 Drone Cookbook Changelog
 =========================
 
+v0.5.0
+------
+Configure Drone with TOML (Graham Weldon)
+Use new Drone package URL (Ke Zhu)
+
 v0.4.0
 ------
 
