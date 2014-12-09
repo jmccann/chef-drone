@@ -1,6 +1,11 @@
 AlignParameters:
   Enabled: false
 
+Style/LineLength:
+  Exclude:
+    - 'test/**/*'
+    - 'spec/**/*'
+
 Encoding:
   Enabled: false
 

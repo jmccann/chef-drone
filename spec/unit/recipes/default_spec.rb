@@ -12,7 +12,7 @@ describe_recipe 'drone::default' do
     it { expect(chef_run).to include_recipe('drone::install_source') }
   end
 
-  context %Q(with node['drone']['install_type'] = 'package') do
+  context %(with node['drone']['install_type'] = 'package') do
     let(:chef_run) do
       ChefSpec::Runner.new(platform: 'ubuntu', version: '14.04') do |node|
         node.set['drone']['install_type'] = 'package'
