@@ -53,6 +53,26 @@ The default configuration is minimal:
 
 *Note:* It is recommended that you link at least one source control system to drone, to enable the capability to login.
 
+The following example configuration enables Drone to authenticate off a Github Enterprise installation:
+
+	default['drone']['config'] = {
+	  'server' => {
+	    'port' => ':80',
+	  },
+	  'database' => {
+	    'driver' => 'sqlite3',
+	    'datasource' => '/var/lib/drone/drone.sqlite'
+	  },
+	  'github_enterprise' => {
+	    'client' => 'YOURCLIENT',
+	    'secret' => 'YOURSECRET',
+	    'api' => 'http://github.mycompany.com/api/v3/',
+	    'url' => 'http://github.mycompany.com',
+	    'private_mode' => true,
+	    'open' => true
+	  }
+	}
+
 There are many more configuration options that you can specify, and the complete config is shown below:
 
 	default['drone']['config'] = {
