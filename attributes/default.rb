@@ -10,8 +10,5 @@ default['drone']['config'] = {
   'database' => {
     'driver' => 'sqlite3',
     'datasource' => '/var/lib/drone/drone.sqlite'
-  },
-  'registration' => {
-    'open' => true
   }
 }
