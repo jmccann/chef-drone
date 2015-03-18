@@ -1,4 +1,4 @@
-include_recipe 'docker'
+include_recipe 'docker' if node['drone']['install_docker']
 
 remote_file node['drone']['temp_file'] do
   source node['drone']['package_url']
