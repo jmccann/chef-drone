@@ -48,11 +48,10 @@ The default configuration is minimal:
 	  'database' => {
 	    'driver' => 'sqlite3',
 	    'datasource' => '/var/lib/drone/drone.sqlite'
-	  },
-	  'registration' => {
-	    'open' => true
 	  }
 	}
+
+*Note:* It is recommended that you link at least one source control system to drone, to enable the capability to login.
 
 There are many more configuration options that you can specify, and the complete config is shown below:
 
@@ -62,6 +61,13 @@ There are many more configuration options that you can specify, and the complete
 	    'ssl' => {
 	      'key' => '',
 	      'cert' => ''
+	    },
+	    'assets' => {
+	      'folder' => ''
+	    },
+	    'session' => {
+	      'secret' => '',
+	      'expires' => ''
 	    }
 	  },
 	  'session' => {
@@ -72,26 +78,36 @@ There are many more configuration options that you can specify, and the complete
 	    'driver' => 'sqlite3',
 	    'datasource' => '/var/lib/drone/drone.sqlite'
 	  },
-	  'registration' => {
-	    'open' => true
-	  },
 	  'github' => {
 	    'client' => '',
-	    'secret' => ''
+	    'secret' => '',
+	    'orgs' => [],
+	    'open' => false
 	  },
 	  'github_enterprise' => {
 	    'client' => '',
 	    'secret' => '',
 	    'api' => '',
 	    'url' => '',
-	    'private_mode' => false
+	    'private_mode' => false,
+	    'open' => false
 	  },
 	  'bitbucket' => {
 	    'client' => '',
-	    'secret' => ''
+	    'secret' => '',
+	    'open' => false
 	  },
 	  'gitlab' => {
-	    'url' => ''
+	    'url' => '',
+	    'client' => '',
+	    'secret' => '',
+	    'skip_verify' => false,
+	    'open' => false
+	  },
+	  'gogs' => {
+	    'url' => '',
+	    'secret' => '',
+	    'open' => false
 	  },
 	  'smtp' => {
 	    'host' => '',
@@ -100,9 +116,11 @@ There are many more configuration options that you can specify, and the complete
 	    'user' => '',
 	    'pass' => ''
 	  },
-	  'worker' => {
+	  'docker' => {
 	    'cert' => '',
-	    'key' => '',
+	    'key' => ''
+	  },
+	  'worker' => {
 	    'nodes' => [
 	      'unix:///var/run/docker.sock'
 	    ]
