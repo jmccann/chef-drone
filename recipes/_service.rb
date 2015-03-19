@@ -15,9 +15,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe 'docker::default'
+include_recipe 'chef-sugar::default'
 
-install_type = node['drone']['install_type']
-include_recipe "drone::install_#{install_type}"
+template 'drone.conf' do
+  source 'drone.conf.erb'
+  path node['drone']['config_file']
+  mode 0644
+  owner 'root'
+  group 'root'
+  notifies :restart, 'service[drone]', :delayed
+end
 
-include_recipe 'drone::_service'
+require_chef_gem 'toml'
+file node['drone']['toml_file'] do
+  mode 0644
+  content ::TOML::Generator.new(node['drone']['config']).body
+  notifies :restart, 'service[drone]', :delayed
+end
+
+service 'drone' do
+  supports status: true, restart: true
+  action [:enable, :start]
+  subscribes :restart, 'template[drone.conf]', :immediately
+  subscribes :restart, "file[#{node['drone']['toml_file']}]", :immediately
+end
