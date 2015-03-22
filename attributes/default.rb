@@ -1,3 +1,4 @@
+default['drone']['install_docker'] = true
 default['drone']['package_url'] = 'http://downloads.drone.io/master/drone.deb'
 default['drone']['temp_file'] = '/tmp/drone.deb'
 default['drone']['config_file'] = '/etc/init/drone.conf'
@@ -10,8 +11,5 @@ default['drone']['config'] = {
   'database' => {
     'driver' => 'sqlite3',
     'datasource' => '/var/lib/drone/drone.sqlite'
-  },
-  'registration' => {
-    'open' => true
   }
 }
