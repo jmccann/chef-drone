@@ -1,6 +1,12 @@
 Drone Cookbook Changelog
 =========================
 
+v0.6.0
+------
+* Docker can now be disabled (Graham Weldon)
+* Fix `registration` option - moving to each VCS config (Graham Weldon)
+* Extend / improve README documentation
+
 v0.5.0
 ------
 * Configure Drone with TOML (Graham Weldon)
