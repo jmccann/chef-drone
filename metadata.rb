@@ -8,6 +8,7 @@ version          '0.5.0'
 
 depends 'chef-sugar'
 depends 'docker'
+depends 'poise-service'
 depends 'golang'
 
 supports 'redhat', '>= 6.5'
