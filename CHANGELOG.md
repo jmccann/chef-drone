@@ -1,6 +1,14 @@
 Drone Cookbook Changelog
 =========================
 
+v0.7.0
+------
+* Deploy Drone v0.4.0 (a dev branch)
+* Add dronerc template
+* Add docker recipe to install docker from cookbook
+* Add update recipe to update docker images
+* For integrations generates docker self-signed certs
+
 v0.6.0
 ------
 * Docker can now be disabled (Graham Weldon)

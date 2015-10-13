@@ -17,18 +17,19 @@ platforms:
   - name: ubuntu-14.04
 
 suites:
+
   - name: default
-    run_list:
-      - recipe[drone::default]
-  - name: config
     run_list:
       - recipe[drone::default]
     attributes:
       drone:
-        config:
-          server:
-            port: ':443'
-          worker:
-            nodes:
-              - "unix:///var/run/docker.sock"
-              - "unix:///var/run/docker.sock"
+        server_address: ':80'
+
+  - name: extended  # https, docker, config
+    run_list:
+      - recipe[drone::default]
+    attributes:
+      drone:
+        generate_certs: true
+        install_docker: true
+        server_address: ':443'

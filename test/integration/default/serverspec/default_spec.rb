@@ -5,10 +5,6 @@ describe 'Drone CI server' do
     it { should be_executable }
   end
 
-  describe file('/usr/local/bin/droned') do
-    it { should be_executable }
-  end
-
   describe service('drone') do
     it { should be_enabled }
     it { should be_running }
@@ -23,7 +19,7 @@ describe 'Drone CI server' do
   end
 
   # Ubuntu image doesn't doesn't have cURL by default but wget can be used.
-  describe command('wget -q --spider localhost/install') do
+  describe command("wget -q #{host_inventory['hostname']}/login") do
     its(:exit_status) { should eq 0 }
   end
 end

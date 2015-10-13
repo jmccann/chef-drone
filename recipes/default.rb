@@ -1,4 +1,5 @@
-include_recipe 'docker' if node['drone']['install_docker']
+
+include_recipe "#{cookbook_name}::docker" if node['drone']['install_docker']
 
 remote_file node['drone']['temp_file'] do
   source node['drone']['package_url']
@@ -11,22 +12,20 @@ dpkg_package 'drone' do
 end
 
 template 'drone.conf' do
-  source 'drone.conf.erb'
-  path node['drone']['config_file']
+  source 'drone.init.erb'
+  path node['drone']['init_file']
   mode 0644
   owner 'root'
   group 'root'
   notifies :restart, 'service[drone]', :delayed
 end
 
-chef_gem 'toml'
-require 'toml'
-toml_string = ::TOML::Generator.new(node['drone']['config']).body
-
-file node['drone']['toml_file'] do
+template 'dronerc' do
+  source 'dronerc.erb'
+  path node['drone']['configrc']
   mode 0644
-  action :create
-  content toml_string
+  owner 'root'
+  group 'root'
   notifies :restart, 'service[drone]', :delayed
 end
 
