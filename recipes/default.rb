@@ -22,7 +22,7 @@ end
 
 template 'dronerc' do
   source 'dronerc.erb'
-  path node['drone']['configrc']
+  path node['drone']['dronerc']
   mode 0644
   owner 'root'
   group 'root'
@@ -35,5 +35,5 @@ service 'drone' do
   action [:enable, :start]
   restart_command 'service drone restart'
   subscribes :restart, 'template[drone.conf]', :immediately
-  subscribes :restart, "file[#{node['drone']['toml_file']}]", :immediately
+  subscribes :restart, "file[#{node['drone']['dronerc']}]", :immediately
 end

@@ -1,4 +1,4 @@
-require 'emeril/rake'
+# require 'emeril/rake'
 require 'foodcritic'
 require 'rubocop/rake_task'
 

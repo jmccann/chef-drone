@@ -36,116 +36,20 @@ config | Hash of configuration options | Hash | See Config section below
 
 # Configuration
 
-The configuration is defined as a hash, and converted to TOML format for drone's configuration.
+The configuration in Drone 0.4.0 changed from TOML to BASH RC file.
 
-The default configuration is minimal:
+The minimum required attribute is to set following tokens for your "remote" driver (gitlab, github, etc..)
 
-	default['drone']['config'] = {
-	  'server' => {
-	    'port' => ':80',
-	  },
-	  'database' => {
-	    'driver' => 'sqlite3',
-	    'datasource' => '/var/lib/drone/drone.sqlite'
-	  }
-	}
+    node['drone']['oauth_client']
+    node['drone']['oauth_secret']
 
-*Note:* It is recommended that you link at least one source control system to drone, to enable the capability to login.
+See the drone documentations and `attributes/default.rb` for more options.
 
-The following example configuration enables Drone to authenticate off a Github Enterprise installation:
-
-	default['drone']['config'] = {
-	  'server' => {
-	    'port' => ':80',
-	  },
-	  'database' => {
-	    'driver' => 'sqlite3',
-	    'datasource' => '/var/lib/drone/drone.sqlite'
-	  },
-	  'github_enterprise' => {
-	    'client' => 'YOURCLIENT',
-	    'secret' => 'YOURSECRET',
-	    'api' => 'http://github.mycompany.com/api/v3/',
-	    'url' => 'http://github.mycompany.com',
-	    'private_mode' => true,
-	    'open' => true
-	  }
-	}
-
-There are many more configuration options that you can specify, and the complete config is shown below:
-
-	default['drone']['config'] = {
-	  'server' => {
-	    'port' => ':80',
-	    'ssl' => {
-	      'key' => '',
-	      'cert' => ''
-	    },
-	    'assets' => {
-	      'folder' => ''
-	    },
-	    'session' => {
-	      'secret' => '',
-	      'expires' => ''
-	    }
-	  },
-	  'session' => {
-	    'secret' => '',
-	    'expires' => ''
-	  },
-	  'database' => {
-	    'driver' => 'sqlite3',
-	    'datasource' => '/var/lib/drone/drone.sqlite'
-	  },
-	  'github' => {
-	    'client' => '',
-	    'secret' => '',
-	    'orgs' => [],
-	    'open' => false
-	  },
-	  'github_enterprise' => {
-	    'client' => '',
-	    'secret' => '',
-	    'api' => '',
-	    'url' => '',
-	    'private_mode' => false,
-	    'open' => false
-	  },
-	  'bitbucket' => {
-	    'client' => '',
-	    'secret' => '',
-	    'open' => false
-	  },
-	  'gitlab' => {
-	    'url' => '',
-	    'client' => '',
-	    'secret' => '',
-	    'skip_verify' => false,
-	    'open' => false
-	  },
-	  'gogs' => {
-	    'url' => '',
-	    'secret' => '',
-	    'open' => false
-	  },
-	  'smtp' => {
-	    'host' => '',
-	    'port' => '',
-	    'from' => '',
-	    'user' => '',
-	    'pass' => ''
-	  },
-	  'docker' => {
-	    'cert' => '',
-	    'key' => ''
-	  },
-	  'worker' => {
-	    'nodes' => [
-	      'unix:///var/run/docker.sock'
-	    ]
-	  }
-	}
+You may also include `drone::docker` recipe or set node['drone']['install_docker'] to install docker on your host. See `attributes/docker.rb` for more options.
 
 # Recipes
 
-* `recipe[drone]` Installs/Configures Drone
+* `recipe[default]` Installs/Configures Drone
+* `recipe[docker]`  Installs/Configures Docker
+* `recipe[update]`  If docker cookbook is used, you may use this recipe to update drone images regularly. (not yet implemented)
+

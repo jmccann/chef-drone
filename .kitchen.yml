@@ -30,6 +30,9 @@ suites:
       - recipe[drone::default]
     attributes:
       drone:
+        docker_tls: true
         generate_certs: true
         install_docker: true
         server_address: ':443'
+        server_crt: /etc/ssl/certs/self-signed-server.pem
+        server_key: /etc/ssl/private/self-signed-server.key

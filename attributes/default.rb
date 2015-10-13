@@ -33,7 +33,7 @@ default['drone']['oauth_secret'] = ''
 # remote configuration
 #
 default['drone']['remote_driver'] = 'github'
-default['drone']['remote_config'] = 'https://github.com?client_id=${client_id}&client_secret=${client_secret}'
+default['drone']['remote_config'] = 'https://github.com?client_id=${CLIENT}&client_secret=${SECRET}'
 
 # docker configuration
 #

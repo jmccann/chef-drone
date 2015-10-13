@@ -10,7 +10,7 @@ describe 'Drone with custom configuration' do
   end
 
   # Ubuntu image doesn't doesn't have cURL by default but wget can be used.
-  describe command('wget -q --spider ' + `hostname` + ':443/login') do
+  describe command("wget -q #{host_inventory['hostname']}:443/login") do
     its(:exit_status) { should eq 0 }
   end
 end
