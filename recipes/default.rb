@@ -30,10 +30,12 @@ template 'dronerc' do
 end
 
 service 'drone' do
+  retries 3
+  retry_delay 20
   provider Chef::Provider::Service::Upstart
   supports status: true, restart: true
   action [:enable, :start]
   restart_command 'service drone restart'
-  subscribes :restart, 'template[drone.conf]', :immediately
-  subscribes :restart, "file[#{node['drone']['dronerc']}]", :immediately
+  subscribes :restart, 'template[drone.conf]', :delayed
+  subscribes :restart, "file[#{node['drone']['dronerc']}]", :delayed
 end
