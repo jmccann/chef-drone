@@ -22,6 +22,9 @@ client = ssl_certificate 'self-signed-docker-client' do
 end
 
 docker_service 'default' do
+  version '1.8.3'
+  retries 3
+  retry_delay 20
   host ['unix:///var/run/docker.sock', "tcp://#{node['ipaddress']}:4242"]
   tls node['drone']['docker_tls']
   tls_verify node['drone']['docker_tls_verify']
@@ -30,6 +33,5 @@ docker_service 'default' do
   tls_server_key node['drone']['docker_tls_server_key'] || server.key_path if node['drone']['generate_certs']
   tls_client_cert node['drone']['docker_tls_client_crt'] || client.cert_path if node['drone']['generate_certs']
   tls_client_key node['drone']['docker_tls_client_key'] || client.key_path if node['drone']['generate_certs']
-  # provider Chef::Provider::DockerService::Systemd
   action [:create, :start]
 end
