@@ -1,5 +1,6 @@
 
 default['drone']['docker_tls'] = false
+default['drone']['docker_hosts'] = ['unix:///var/run/docker.sock']
 default['drone']['docker_tls_verify']  = false
 default['drone']['docker_tls_ca_crt']  = nil
 default['drone']['docker_tls_server_crt']  = nil

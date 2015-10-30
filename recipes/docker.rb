@@ -25,7 +25,7 @@ docker_service 'default' do
   version '1.8.3'
   retries 3
   retry_delay 20
-  host ['unix:///var/run/docker.sock', "tcp://#{node['ipaddress']}:4242"]
+  host node['drone']['docker_hosts']
   tls node['drone']['docker_tls']
   tls_verify node['drone']['docker_tls_verify']
   tls_ca_cert node['drone']['docker_tls_ca_crt'] || server.ca_cert_path if node['drone']['generate_certs']
