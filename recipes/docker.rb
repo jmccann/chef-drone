@@ -3,7 +3,7 @@
 server = ssl_certificate 'self-signed-server' do
   namespace node['fqdn']
   notifies :restart, 'docker_service[default]', :delayed
-  notifies :restart, 'service[drone]', :delayed
+  #notifies :restart, 'service[drone]', :delayed
   only_if node['drone']['generate_certs'].to_s
 end
 
@@ -29,7 +29,8 @@ if node['drone']['generate_certs']
     node.set['drone']['docker_tls_client_key'] || client.key_path
 end
 
-if node['drone']['docker_tls']
+
+if node['drone']['docker_tls'] && node['drone']['docker_tls_server_key']
     docker_service 'default' do
       version '1.8.3'
       retries 3
@@ -53,3 +54,4 @@ else
       action [:create, :start]
     end
 end
+
