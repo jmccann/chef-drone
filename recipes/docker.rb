@@ -21,17 +21,35 @@ client = ssl_certificate 'self-signed-docker-client' do
   only_if node['drone']['generate_certs'].to_s
 end
 
-docker_service 'default' do
-  version '1.8.3'
-  retries 3
-  retry_delay 20
-  host node['drone']['docker_hosts']
-  tls node['drone']['docker_tls']
-  tls_verify node['drone']['docker_tls_verify']
-  tls_ca_cert node['drone']['docker_tls_ca_crt'] || server.ca_cert_path if node['drone']['generate_certs']
-  tls_server_cert node['drone']['docker_tls_server_crt'] || server.cert_path if node['drone']['generate_certs']
-  tls_server_key node['drone']['docker_tls_server_key'] || server.key_path if node['drone']['generate_certs']
-  tls_client_cert node['drone']['docker_tls_client_crt'] || client.cert_path if node['drone']['generate_certs']
-  tls_client_key node['drone']['docker_tls_client_key'] || client.key_path if node['drone']['generate_certs']
-  action [:create, :start]
+if node['drone']['generate_certs']
+    node.set['drone']['docker_tls_ca_crt'] || server.ca_cert_path
+    node.set['drone']['docker_tls_server_crt'] || server.cert_path
+    node.set['drone']['docker_tls_server_key'] || server.key_path
+    node.set['drone']['docker_tls_client_crt'] || client.cert_path
+    node.set['drone']['docker_tls_client_key'] || client.key_path
+end
+
+if node['drone']['docker_tls']
+    docker_service 'default' do
+      version '1.8.3'
+      retries 3
+      retry_delay 20
+      host node['drone']['docker_hosts']
+      tls node['drone']['docker_tls']
+      tls_verify node['drone']['docker_tls_verify']
+      tls_ca_cert node['drone']['docker_tls_ca_crt']
+      tls_server_cert node['drone']['docker_tls_server_crt']
+      tls_server_key node['drone']['docker_tls_server_key']
+      tls_client_cert node['drone']['docker_tls_client_crt']
+      tls_client_key node['drone']['docker_tls_client_key']
+      action [:create, :start]
+    end
+else
+    docker_service 'default' do
+      version '1.8.3'
+      retries 3
+      retry_delay 20
+      host node['drone']['docker_hosts']
+      action [:create, :start]
+    end
 end
