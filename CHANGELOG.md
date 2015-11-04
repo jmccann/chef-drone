@@ -1,6 +1,11 @@
 Drone Cookbook Changelog
 =========================
 
+v0.7.7
+------
+* Uses docker version from attributes (default 1.8.3)
+* Specify docker tls certs or use self-generated
+
 v0.7.0
 ------
 * Deploy Drone v0.4.0 (a dev branch)

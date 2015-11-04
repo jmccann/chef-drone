@@ -1,4 +1,6 @@
 
+default['drone']['docker_version'] = '1.8.3'
+
 default['drone']['docker_tls'] = false
 default['drone']['docker_hosts'] = ['unix:///var/run/docker.sock']
 default['drone']['docker_tls_verify']  = false

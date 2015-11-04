@@ -32,8 +32,8 @@ end
 
 if node['drone']['docker_tls'] && node['drone']['docker_tls_server_key']
     docker_service 'default' do
-      version '1.8.3'
-      retries 3
+      version node['drone']['docker_version']
+      retries 1
       retry_delay 20
       host node['drone']['docker_hosts']
       tls node['drone']['docker_tls']
@@ -47,8 +47,8 @@ if node['drone']['docker_tls'] && node['drone']['docker_tls_server_key']
     end
 else
     docker_service 'default' do
-      version '1.8.3'
-      retries 3
+      version node['drone']['docker_version']
+      retries 1
       retry_delay 20
       host node['drone']['docker_hosts']
       action [:create, :start]
