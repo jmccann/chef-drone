@@ -36,6 +36,7 @@ if node['drone']['docker_tls'] && node['drone']['docker_tls_server_key']
       retries 1
       retry_delay 20
       host node['drone']['docker_hosts']
+      storage_driver node['drone']['docker_storage_driver']
       tls node['drone']['docker_tls']
       tls_verify node['drone']['docker_tls_verify']
       tls_ca_cert node['drone']['docker_tls_ca_crt']
@@ -51,6 +52,7 @@ else
       retries 1
       retry_delay 20
       host node['drone']['docker_hosts']
+      storage_driver node['drone']['docker_storage_driver']
       action [:create, :start]
     end
 end

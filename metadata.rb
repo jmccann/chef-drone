@@ -4,7 +4,7 @@ maintainer_email 'justin@justincampbell.me'
 license          'Apache 2.0'
 description      'Installs/Configures Drone'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.7.7'
+version          '0.7.8'
 
 depends 'docker', '>= 2.2.2'
 depends 'ssl_certificate'
