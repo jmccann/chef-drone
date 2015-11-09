@@ -2,7 +2,8 @@
 # drone, docker servers + ca
 server = ssl_certificate 'self-signed-server' do
   namespace node['fqdn']
-  notifies :restart, 'docker_service[default]', :delayed
+  # NOTE, there is no longer :restart action on docker_service
+  #notifies :restart, 'docker_service[default]', :delayed
   #notifies :restart, 'service[drone]', :delayed
   only_if node['drone']['generate_certs'].to_s
 end
@@ -17,7 +18,8 @@ client = ssl_certificate 'self-signed-docker-client' do
   namespace "#{node['hostname']}-docker-client"
   ca_cert_path server.ca_cert_path
   ca_key_path server.ca_key_path
-  notifies :restart, 'docker_service[default]', :delayed
+  # NOTE, there is no longer :restart action on docker_service
+  #notifies :restart, 'docker_service[default]', :delayed
   only_if node['drone']['generate_certs'].to_s
 end
 
