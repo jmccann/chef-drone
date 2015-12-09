@@ -38,9 +38,9 @@ default['drone']['remote_config'] = 'https://github.com?client_id=${CLIENT}&clie
 # docker configuration
 #
 default['drone']['docker_host_1'] = 'unix:///var/run/docker.sock'
-default['drone']['docker_host_2'] = nil
-default['drone']['docker_host_3'] = nil
-default['drone']['docker_host_4'] = nil
+default['drone']['docker_host_2'] = 'unix:///var/run/docker.sock'
+default['drone']['docker_host_3'] = 'unix:///var/run/docker.sock'
+default['drone']['docker_host_4'] = 'unix:///var/run/docker.sock'
 # TODO, allow specify external docker or multiple docker socks
 # DOCKER_HOST_1=
 # DOCKER_CERT=""
