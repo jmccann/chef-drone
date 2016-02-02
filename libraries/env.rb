@@ -1,6 +1,7 @@
 module ChefDrone
+  # Methods for generating drone container ENV from node attributes
   module Env
-    def drone_env
+    def drone_env # rubocop:disable AbcSize
       env = []
       env << "DATABASE_DRIVER=#{node['drone']['database_driver']}"
       env << "DATABASE_CONFIG=#{node['drone']['database_config']}"

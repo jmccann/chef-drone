@@ -6,8 +6,8 @@ server = ssl_certificate 'self-signed-server' do
   # notifies :restart, 'service[drone]', :delayed
 end
 
-node.set[node['drone']['server_crt']] = server.cert_path
-node.set[node['drone']['server_key']] = server.key_path
+node.normal[node['drone']['server_crt']] = server.cert_path # ~FC047
+node.normal[node['drone']['server_key']] = server.key_path # ~FC047
 
 # docker client
 client = ssl_certificate 'self-signed-docker-client' do
@@ -18,8 +18,8 @@ client = ssl_certificate 'self-signed-docker-client' do
   # notifies :restart, 'docker_service[default]', :delayed
 end
 
-node.set['drone']['docker']['tls_ca_crt'] || server.ca_cert_path
-node.set['drone']['docker']['tls_server_crt'] || server.cert_path
-node.set['drone']['docker']['tls_server_key'] || server.key_path
-node.set['drone']['docker']['tls_client_crt'] || client.cert_path
-node.set['drone']['docker']['tls_client_key'] || client.key_path
+node.normal['drone']['docker']['tls_ca_crt'] || server.ca_cert_path
+node.normal['drone']['docker']['tls_server_crt'] || server.cert_path
+node.normal['drone']['docker']['tls_server_key'] || server.key_path
+node.normal['drone']['docker']['tls_client_crt'] || client.cert_path
+node.normal['drone']['docker']['tls_client_key'] || client.key_path
