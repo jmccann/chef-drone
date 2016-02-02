@@ -1,3 +1,4 @@
+default['drone']['install_method'] = 'container'
 
 # package
 default['drone']['package_url'] = 'http://downloads.drone.io/0.4.0/drone.deb'
@@ -36,11 +37,8 @@ default['drone']['remote_driver'] = 'github'
 default['drone']['remote_config'] = 'https://github.com?client_id=${CLIENT}&client_secret=${SECRET}'
 
 # docker configuration
-#
-default['drone']['docker_host_1'] = 'unix:///var/run/docker.sock'
-default['drone']['docker_host_2'] = 'unix:///var/run/docker.sock'
-default['drone']['docker_host_3'] = 'unix:///var/run/docker.sock'
-default['drone']['docker_host_4'] = 'unix:///var/run/docker.sock'
+default['drone']['docker_hosts'] = ['unix:///var/run/docker.sock', 'unix:///var/run/docker.sock']
+
 # TODO, allow specify external docker or multiple docker socks
 # DOCKER_HOST_1=
 # DOCKER_CERT=""

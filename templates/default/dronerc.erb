@@ -24,10 +24,9 @@ REMOTE_CONFIG="<%= node['drone']['remote_config'] %>"
 
 # docker configuration
 
-DOCKER_HOST_1="<%= node['drone']['docker_host_1'] %>"
-<% if node['drone']['docker_host2']%>DOCKER_HOST_2="<%= node['drone']['docker_host_2'] %>"<% end %>
-<% if node['drone']['docker_host3']%>DOCKER_HOST_3="<%= node['drone']['docker_host_3'] %>"<% end %>
-<% if node['drone']['docker_host4']%>DOCKER_HOST_4="<%= node['drone']['docker_host_4'] %>"<% end %>
+<% node['drone']['docker_hosts'].each_with_index do |host, idx| %>
+DOCKER_HOST_<%= idx + 1 %>="<%= host %>"
+<% end %>
 
 # TODO, allow specify external docker or multiple docker socks
 #DOCKER_HOST_1=
@@ -38,4 +37,3 @@ DOCKER_HOST_1="<%= node['drone']['docker_host_1'] %>"
 # plugin configuration
 #
 PLUGIN_FILTER="<%= node['drone']['plugin_filter'] %>"
-

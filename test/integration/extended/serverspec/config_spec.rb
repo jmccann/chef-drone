@@ -1,6 +1,15 @@
 require_relative 'spec_helper'
 
 describe 'Drone with custom configuration' do
+  describe file('/usr/local/bin/drone') do
+    it { should be_executable }
+  end
+
+  describe service('drone') do
+    it { should be_enabled }
+    it { should be_running }
+  end
+
   describe file('/etc/drone/dronerc') do
     its(:content) { should match(/SERVER_ADDR=":443"/) }
   end

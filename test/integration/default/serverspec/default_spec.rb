@@ -1,15 +1,6 @@
 require_relative 'spec_helper'
 
 describe 'Drone CI server' do
-  describe file('/usr/local/bin/drone') do
-    it { should be_executable }
-  end
-
-  describe service('drone') do
-    it { should be_enabled }
-    it { should be_running }
-  end
-
   describe file('/var/lib/drone/drone.sqlite') do
     it { should be_file }
   end

@@ -1,13 +1,11 @@
 ---
-driver_plugin: vagrant
-
-driver_config:
-  customize:
-    memory: 1024
-  require_chef_omnibus: latest
-
 driver:
   name: vagrant
+  customize:
+    memory: 1024
+  require_chef_omnibus: true
+  network:
+    - ["forwarded_port", {guest: 80, host: 8888}]
 
 provisioner:
   name: chef_zero
@@ -17,19 +15,18 @@ platforms:
   - name: ubuntu-14.04
 
 suites:
-
   - name: default
     run_list:
+      - recipe[ubuntu::default]
       - recipe[drone::default]
-    attributes:
-      drone:
-        server_address: ':80'
 
   - name: extended  # https, docker, config
     run_list:
+      - recipe[ubuntu::default]
       - recipe[drone::default]
     attributes:
       drone:
+        install_method: package
         docker_tls: true
         generate_certs: true
         install_docker: true
