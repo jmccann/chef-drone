@@ -1,7 +1,7 @@
 
 # NOTE, assuming to switch from default['drone']['docker_*'] to default['docker'][....]
 
-default['drone']['docker']['version'] = '1.8.3'
+default['drone']['docker']['version'] = '1.9.1'
 default['drone']['docker']['storage_driver'] = 'aufs'
 default['drone']['docker']['hosts'] = ['unix:///var/run/docker.sock']
 
