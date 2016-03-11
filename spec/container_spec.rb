@@ -20,11 +20,6 @@ describe 'drone::container' do
       expect(chef_run).to run_docker_container('drone')
     end
 
-    it 'sets drone container address' do
-      drone_container_resource = chef_run.docker_container 'drone'
-      expect(drone_container_resource.env).to include('SERVER_ADDR=:80')
-    end
-
     it 'sets drone container hosts' do
       drone_container_resource = chef_run.docker_container 'drone'
       expect(drone_container_resource.env).to include('DOCKER_HOST_1=unix:///var/run/docker.sock')
