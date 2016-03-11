@@ -19,7 +19,9 @@ suites:
       - recipe[ubuntu::default]
       - recipe[drone::default]
 
-  - name: extended  # https, docker, config
+  - name: extended  # https, package, config
+    excludes:
+      - ubuntu-15.04
     run_list:
       - recipe[ubuntu::default]
       - recipe[drone::default]
