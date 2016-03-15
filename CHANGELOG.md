@@ -1,6 +1,11 @@
 Drone Cookbook Changelog
 =========================
 
+v1.0.0
+------
+* BREAKING CHANGE: Use drone containers rather then installing drone package by default
+* Add ability to deploy drone using drone docker container
+
 v0.7.7
 ------
 * Uses docker version from attributes (default 1.8.3)
