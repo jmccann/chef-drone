@@ -1,3 +1,6 @@
+LineLength:
+    Max: 150
+
 AlignParameters:
   Enabled: false
 
@@ -7,6 +10,6 @@ Encoding:
 StringLiterals:
   Enabled: false
 
-Style/SingleSpaceBeforeFirstArg:
+SpaceBeforeFirstArg:
   Exclude:
     - metadata.rb

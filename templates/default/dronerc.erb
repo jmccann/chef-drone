@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# server configuration
+
+SERVER_ADDR="<%= node['drone']['server_address'] %>"
+SERVER_CERT="<%= node['drone']['server_crt'] %>"
+SERVER_KEY="<%= node['drone']['server_key'] %>"
+
+# database configuration
+
+DATABASE_DRIVER="<%= node['drone']['database_driver'] %>"
+DATABASE_CONFIG="<%= node['drone']['database_config'] %>"
+
+
+# oauth2 client/secret. REQUIRED
+
+CLIENT="<%= node['drone']['oauth_client'] %>"
+SECRET="<%= node['drone']['oauth_secret'] %>"
+
+# remote configuration
+
+REMOTE_DRIVER="<%= node['drone']['remote_driver'] %>"
+REMOTE_CONFIG="<%= node['drone']['remote_config'] %>"
+
+# docker configuration
+
+<% node['drone']['docker_hosts'].each_with_index do |host, idx| %>
+DOCKER_HOST_<%= idx + 1 %>="<%= host %>"
+<% end %>
+
+# TODO, allow specify external docker or multiple docker socks
+#DOCKER_HOST_1=
+#DOCKER_CERT=""
+#DOCKER_KEY=""
+#DOCKER_CA=""
+
+# plugin configuration
+#
+PLUGIN_FILTER="<%= node['drone']['plugin_filter'] %>"
