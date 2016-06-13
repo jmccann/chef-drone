@@ -1,4 +1,4 @@
-include_recipe 'drone::docker'
+include_recipe 'drone::_docker'
 
 docker_image 'drone' do
   repo 'drone/drone'

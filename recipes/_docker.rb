@@ -1,5 +1,10 @@
 include_recipe 'drone::_gen_docker_certs' if node['drone']['generate_certs']
 
+# Required for aufs
+package "linux-image-extra-#{node['kernel']['release']}" do
+  only_if { node['drone']['docker']['storage_driver'] == 'aufs' }
+end
+
 docker_service 'default' do
   version node['drone']['docker']['version']
   install_method 'binary'

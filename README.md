@@ -20,10 +20,18 @@ This cookbook is tested against:
 ...but it might work on other platforms.
 
 # Usage
+## Recipes
+### drone::default
+Installs the drone server.
 
 Include `recipe[drone::default]` in your run list.
 
-# Attributes
+### drone::worker
+Installs the drone worker.
+
+Include `recipe[drone::worker]` in your run list.
+
+## Attributes
 
 These attributes are under the `node['drone']` namespace.
 
@@ -31,7 +39,7 @@ Attribute | Description | Type | Default
 ----------|-------------|------|--------
 config | Hash of configuration options | Hash | See Configuration section below
 
-# Configuration
+## Configuration
 
 The configuration in Drone 0.4.0 changed from TOML to BASH RC file.
 
@@ -42,11 +50,6 @@ The minimum required attribute is to set following tokens for your "remote" driv
 
 See the drone documentations and `attributes/default.rb` for more options.
 
-## Docker
+### Docker
 
 See `attributes/docker.rb` for more options.
-
-# Recipes
-
-* `recipe[default]` Installs/Configures Drone
-* `recipe[docker]`  Installs/Configures Docker
