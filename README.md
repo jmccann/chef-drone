@@ -13,8 +13,9 @@ Installs [Drone](https://github.com/drone/drone), a CI server built on [Docker](
 
 This cookbook is tested against:
 
-* Ubuntu 14.04
 * Ubuntu 15.04
+* Ubuntu 15.10
+* Ubuntu 16.04
 
 ...but it might work on other platforms.
 

@@ -12,22 +12,12 @@ provisioner:
   name: chef_zero
 
 platforms:
-  - name: ubuntu-14.04
   - name: ubuntu-15.04
+  - name: ubuntu-15.10
+  - name: ubuntu-16.04
 
 suites:
   - name: default
     run_list:
       - recipe[ubuntu::default]
       - recipe[drone::default]
-
-  - name: extended  # docker tls
-    run_list:
-      - recipe[ubuntu::default]
-      - recipe[drone::default]
-    attributes:
-      drone:
-        docker_tls: true
-        generate_certs: true
-        server_crt: /etc/ssl/certs/self-signed-server.pem
-        server_key: /etc/ssl/private/self-signed-server.key
