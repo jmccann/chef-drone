@@ -5,6 +5,9 @@ driver:
     memory: 1024
   require_chef_omnibus: true
 
+verifier:
+  name: inspec
+
 provisioner:
   name: chef_zero
 
