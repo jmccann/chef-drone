@@ -11,4 +11,4 @@ version          '1.0.0'
 depends 'docker', '~> 2.5.3'
 depends 'ssl_certificate'
 
-supports 'ubuntu', '>= 12.04'
+supports 'ubuntu', '>= 14.04'
