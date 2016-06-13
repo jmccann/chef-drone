@@ -2,7 +2,13 @@ describe file('/var/lib/drone/drone.sqlite') do
   it { should be_file }
 end
 
+# nginx
 describe port(80) do
+  it { should be_listening }
+end
+
+# drone
+describe port(8000) do
   it { should be_listening }
 end
 

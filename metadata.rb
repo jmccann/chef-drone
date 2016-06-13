@@ -9,6 +9,7 @@ issues_url       'https://github.com/justincampbell/chef-drone/issues'
 version          '1.0.0'
 
 depends 'docker', '~> 2.5.3'
+depends 'nginx', '~> 2.7'
 depends 'ssl_certificate'
 
 supports 'ubuntu', '>= 14.04'

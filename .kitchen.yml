@@ -21,3 +21,4 @@ suites:
     run_list:
       - recipe[ubuntu::default]
       - recipe[drone::default]
+      - recipe[drone::reverse_proxy]
