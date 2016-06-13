@@ -49,6 +49,10 @@ describe 'drone::container' do
       it 'sets PLUGIN_FILTER' do
         expect(drone_env).to include('PLUGIN_FILTER=plugins/*')
       end
+
+      it 'is sensitive' do
+        expect(chef_run).to run_docker_container('drone').with(sensitive: true)
+      end
     end
   end
 end

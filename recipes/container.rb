@@ -13,4 +13,5 @@ docker_container 'drone' do
   env drone_env
   volumes ['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock']
   restart_policy 'always'
+  sensitive true
 end
