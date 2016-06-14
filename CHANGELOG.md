@@ -1,6 +1,14 @@
 Drone Cookbook Changelog
 =========================
 
+v2.0.0
+------
+* BREAKING CHANGE: Move Drone app config items to `node['drone']['config']`
+* Added `drone::reverse_proxy` recipe to be able to front Drone with HTTPS via a reverse proxy
+* Added `drone::agent` recipe to be able to create additional systems to run drone builds on
+* Version bump on docker community cookbook
+* Make `docker_container` resource sensitive to prevent displaying secrets passed through ENV to drone
+
 v1.0.0
 ------
 * BREAKING CHANGE: Use drone containers rather then installing drone package by default
