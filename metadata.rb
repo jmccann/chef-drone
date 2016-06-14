@@ -9,7 +9,7 @@ issues_url       'https://github.com/justincampbell/chef-drone/issues'
 version          '1.0.0'
 
 depends 'chef-vault', '~> 1.3'
-depends 'docker', '~> 2.5.3'
+depends 'docker', '~> 2.8.0'
 depends 'nginx', '~> 2.7'
 depends 'ssl_certificate', '~> 1.12'
 
