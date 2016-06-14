@@ -14,9 +14,10 @@ install: echo "Using ChefDK gems"
 
 before_script:
   - berks install
-  - gem install docker-api
+  - gem install docker-api -v 1.26.2
 
 script:
+  - gem list | grep docker
   - rubocop
   - foodcritic .
   - rspec
