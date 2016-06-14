@@ -26,6 +26,11 @@ Installs the drone server.
 
 Include `recipe[drone::default]` in your run list.
 
+### drone::reverse_proxy
+Fronts drone server with a reverse_proxy using nginx for HTTPS.
+
+Include `recipe[drone::reverse_proxy]` in your run list.
+
 ### drone::worker
 Installs the drone worker.
 

@@ -1,6 +1,15 @@
 server {
   listen 80;
   listen [::]:80;
+  return 301 https://$host$request_uri;
+}
+
+server {
+  listen 443 ssl;
+  listen [::]:443 ssl;
+
+  ssl_certificate /etc/ssl/certs/drone.pem;
+  ssl_certificate_key /etc/ssl/private/drone.key;
 
   server_name <%= node['fqdn'] %>;
 

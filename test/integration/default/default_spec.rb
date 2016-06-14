@@ -6,6 +6,9 @@ end
 describe port(80) do
   it { should be_listening }
 end
+describe port(443) do
+  it { should be_listening }
+end
 
 # drone
 describe port(8000) do
@@ -13,6 +16,6 @@ describe port(8000) do
 end
 
 # Ubuntu image doesn't doesn't have cURL by default but wget can be used.
-describe command("wget -q localhost/login") do
+describe command("wget -q --no-check-certificate https://localhost") do
   its(:exit_status) { should eq 0 }
 end

@@ -1,3 +1,5 @@
+default['drone']['vault']['bag'] = 'vault_drone'
+
 # database configuration
 #
 default['drone']['config']['database_driver'] = 'sqlite3'

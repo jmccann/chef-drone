@@ -8,7 +8,9 @@ require 'spec_helper'
 describe 'drone::reverse_proxy' do
   context 'When all attributes are default, on an unspecified platform' do
     cached(:chef_run) do
-      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04')
+      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |_node, server|
+        inject_databags server
+      end
       runner.converge(described_recipe)
     end
 
@@ -23,6 +25,12 @@ describe 'drone::reverse_proxy' do
 
     it 'installs webserver' do
       expect(chef_run).to include_recipe 'drone::_nginx'
+    end
+
+    it 'installs SSL cert' do
+      expect(chef_run).to create_ssl_certificate('drone').with(common_name: 'target.com', source: 'chef-vault',
+                                                               bag: 'vault_drone', key_item: 'certs', key_item_key: 'key',
+                                                               cert_item: 'certs', cert_item_key: 'cert')
     end
 
     it 'binds drone port to 8000 instead of 80, freeing for webserver' do
