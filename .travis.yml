@@ -17,7 +17,6 @@ before_script:
   - gem install docker-api -v 1.28.0
 
 script:
-  - gem list | grep docker
   - rubocop
   - foodcritic .
   - rspec
