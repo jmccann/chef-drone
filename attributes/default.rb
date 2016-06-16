@@ -1,3 +1,4 @@
+default['drone']['version'] = '0.4'
 default['drone']['vault']['bag'] = 'vault_drone'
 
 # database configuration

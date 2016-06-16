@@ -17,7 +17,7 @@ describe 'drone::container' do
     end
 
     it 'creates drone container' do
-      expect(chef_run).to run_docker_container('drone')
+      expect(chef_run).to run_docker_container('drone').with(tag: '0.4')
     end
 
     describe 'drone container environment' do
