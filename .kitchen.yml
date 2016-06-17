@@ -22,3 +22,19 @@ suites:
       - recipe[ubuntu::default]
       - recipe[drone::default]
       - recipe[drone::reverse_proxy]
+
+  - name: drone05
+    run_list:
+      - recipe[ubuntu::default]
+      - recipe[drone::default]
+      - recipe[drone::reverse_proxy]
+    attributes:
+      drone:
+        config:
+          I_UNDERSTAND_I_AM_USING_AN_UNSTABLE_VERSION: true
+          I_AGREE_TO_FIX_BUGS_AND_NOT_FILE_BUGS: true
+          DRONE_AGENT_SECRET: test
+          DRONE_GITHUB: true
+          DRONE_GITHUB_CLIENT: GH_CLIENT
+          DRONE_GITHUB_SECRET: GH_SECRET
+        version: '0.5'
