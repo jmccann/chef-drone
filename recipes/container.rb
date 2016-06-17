@@ -2,7 +2,7 @@ include_recipe 'drone::_docker'
 
 docker_image 'drone' do
   repo 'drone/drone'
-  tag '0.4'
+  tag node['drone']['version']
   action :pull
 end
 
