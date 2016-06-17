@@ -19,3 +19,10 @@ end
 describe command("wget -q --no-check-certificate https://localhost") do
   its(:exit_status) { should eq 0 }
 end
+
+# No logs from agent (meaning no errors)
+describe command("docker logs agent") do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should eq '' }
+  its(:stderr) { should eq '' }
+end

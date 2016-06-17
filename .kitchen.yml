@@ -26,9 +26,16 @@ suites:
     run_list:
       - recipe[ubuntu::default]
       - recipe[drone::default]
+      - recipe[prep::set_drone_token]
+      - recipe[drone::agent]
       - recipe[drone::reverse_proxy]
     attributes:
       drone:
+        agent:
+          config:
+            I_UNDERSTAND_I_AM_USING_AN_UNSTABLE_VERSION: true
+            I_AGREE_TO_FIX_BUGS_AND_NOT_FILE_BUGS: true
+            drone_server: http://10.0.2.15:8000
         config:
           I_UNDERSTAND_I_AM_USING_AN_UNSTABLE_VERSION: true
           I_AGREE_TO_FIX_BUGS_AND_NOT_FILE_BUGS: true

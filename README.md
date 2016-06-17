@@ -31,9 +31,16 @@ Fronts drone server with a reverse_proxy using nginx for HTTPS.
 Include `recipe[drone::reverse_proxy]` in your run list.
 
 ### drone::worker
-Installs the drone worker.
+Installs and sets up the drone worker.  For use with Drone <= 0.4
+
+Basically installs docker and exposes the socket over TCP for the Drone server to send builds to.
 
 Include `recipe[drone::worker]` in your run list.
+
+### drone::agent
+Installs and sets up the drone agent.  For use with Drone >= 0.5
+
+Include `recipe[drone::agent]` in your run list.
 
 ## Attributes
 

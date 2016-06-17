@@ -1,17 +1,17 @@
 include_recipe 'drone::_docker'
 
-docker_image 'drone' do
+docker_image 'agent' do
   repo 'drone/drone'
   tag node['drone']['version']
-  action :pull
 end
 
-docker_container 'drone' do
+docker_container 'agent' do
   repo 'drone/drone'
   tag node['drone']['version']
-  port '80:8000'
-  env drone_env
-  volumes ['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock']
+  command 'agent'
+  env agent_env
+  volumes ['/var/run/docker.sock:/var/run/docker.sock']
   restart_policy 'always'
+  detach true
   sensitive true
 end
