@@ -1,1 +1,1 @@
-default['drone']['agent']['config']['drone_server'] = 'https://localhost'
+default['drone']['agent']['config']['drone_server'] = 'http://localhost'
