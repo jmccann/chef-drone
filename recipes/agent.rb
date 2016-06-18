@@ -16,9 +16,3 @@ docker_container 'agent' do
   detach true
   sensitive true
 end
-
-# Set secrets from chef-vault if it exists
-new_env = drone_env
-%w(drone_token).each do |item|
-  override_secret 'docker_container[agent]', new_env, item
-end

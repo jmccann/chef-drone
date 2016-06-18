@@ -17,8 +17,3 @@ docker_container 'drone' do
   restart_policy 'always'
   sensitive true
 end
-
-new_env = drone_env
-%w(drone_agent_secret drone_github_secret).each do |item|
-  new_env = override_secret 'docker_container[drone]', new_env, item
-end

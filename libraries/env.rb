@@ -2,23 +2,29 @@ module ChefDrone
   # Methods for generating drone container ENV from node attributes
   module Env
     def drone_env
-      node['drone']['config'].map { |k, v| "#{k.upcase}=#{v}" }
+      env = node['drone']['config'].map { |k, v| "#{k.upcase}=#{v}" }
+      %w(drone_agent_secret drone_github_secret).each do |item|
+        env = override_secret env, item
+      end
+      env
     end
 
     def agent_env
-      node['drone']['agent']['config'].map { |k, v| "#{k.upcase}=#{v}" }
+      env = node['drone']['agent']['config'].map { |k, v| "#{k.upcase}=#{v}" }
+      %w(drone_token).each do |item|
+        env = override_secret env, item
+      end
+      env
     end
 
     #
     # Override attribute secrets if in Vault or DataBag
     #
-    def override_secret(res_name, current_env, item)
-      return unless secret_exist? item
+    def override_secret(current_env, item)
+      return current_env unless secret_exist? item
 
       secret = chef_vault_item(node['drone']['vault']['bag'], item)[item]
-      new_env = current_env.delete_if { |env| env =~ /#{item.upcase}=/ }.push("#{item.upcase}=#{secret}")
-      resources(res_name).env new_env
-      new_env
+      current_env.delete_if { |env| env =~ /#{item.upcase}=/ }.push("#{item.upcase}=#{secret}")
     end
 
     #
