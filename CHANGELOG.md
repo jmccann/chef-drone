@@ -1,5 +1,10 @@
 Drone Cookbook Changelog
 =========================
+v2.1.0
+------
+* Allow specifying version of drone to use
+* Added `drone::agent` recipe for installing Drone 0.5 agent
+* Added ability to apply secrets `drone_agent_secret`, `drone_token`, `drone_github_secret` and `database_config` from vault
 
 v2.0.0
 ------
