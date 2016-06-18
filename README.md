@@ -3,6 +3,8 @@
 
 Installs [Drone](https://github.com/drone/drone), a CI server built on [Docker](https://www.docker.io).
 
+More information also @ http://readme.drone.io.
+
 # Requirements
 
 ## Chef
@@ -44,11 +46,16 @@ Include `recipe[drone::agent]` in your run list.
 
 ## Attributes
 
-These attributes are under the `node['drone']` namespace.
+For Drone ENV config settings see:
+* http://readme.drone.io/setup/overview/#configure - Drone 0.4
+* http://readme.drone.io/0.5/manage/server/ - Drone 0.5
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
-config | Hash of configuration options | Hash | See Configuration section below
+`node['drone']['version']` | Version of Drone | String | Default is `'0.4'`.  Tested some also with `'0.5'`
+`node['drone']['vault']['bag']` | Name of vault with secrets | String | Default is `'vault_drone'`.  See [Vault](#vault) section below.
+`node['drone']['config']` | Hash of Drone ENV configuration options | Hash | See [Configuration](#configuration) section below.
+`node['drone']['agent']['config']` | Hash of configuration options for Drone Agent | Hash | See [Configuration](#configuration) section below.
 
 ## Configuration
 
@@ -61,6 +68,17 @@ The minimum required attribute is to set following tokens for your "remote" driv
 
 See the drone documentations and `attributes/default.rb` for more options.
 
-### Docker
+## Vault
+
+For [`drone::reverse_proxy`](#drone::reverse_proxy) you need:
+* [certs](test/integration/data_bags/vault_drone/certs.json)
+
+Other optional items include:
+* drone_agent_secret
+* drone_token
+* drone_github_secret
+* database_config
+
+## Docker
 
 See `attributes/docker.rb` for more options.
