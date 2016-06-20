@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v2.3.0
+------
+* Allow drone_github_client to be in a Vault
+
 v2.2.0
 ------
 * Attributize logging for Drone containers
