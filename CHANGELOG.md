@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v2.2.0
+------
+* Attributize logging for Drone containers
+
 v2.1.0
 ------
 * Allow specifying version of drone to use
