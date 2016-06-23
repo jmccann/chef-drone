@@ -74,8 +74,8 @@ For [`drone::reverse_proxy`](#drone::reverse_proxy) you need:
 * [certs](test/integration/data_bags/vault_drone/certs.json)
 
 Other optional items include:
-* drone_agent_secret
-* drone_token
+* drone_secret
+* drone_github_client
 * drone_github_secret
 * database_config
 

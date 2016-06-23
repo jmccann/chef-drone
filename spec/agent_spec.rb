@@ -9,7 +9,7 @@ describe 'drone::agent' do
   context 'When all attributes are default, on an unspecified platform, getting secrets from attribtues' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new do |node, _server|
-        node.set['drone']['agent']['config']['drone_token'] = "ATTRagentTOKEN"
+        node.set['drone']['agent']['config']['drone_secret'] = "ATTRagentTOKEN"
       end
       runner.converge(described_recipe)
     end
@@ -32,7 +32,7 @@ describe 'drone::agent' do
       end
 
       it 'sets DRONE_TOKEN from attribute' do
-        expect(agent_env).to include('DRONE_TOKEN=ATTRagentTOKEN')
+        expect(agent_env).to include('DRONE_SECRET=ATTRagentTOKEN')
       end
 
       it 'is sensitive' do
@@ -44,8 +44,8 @@ describe 'drone::agent' do
   context 'When all attributes are default, on an unspecified platform, getting secrets from vault' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new do |node, server|
-        server.create_data_bag('vault_drone', 'drone_token' => { 'drone_token' => 'RANDOMagentTOKEN' })
-        node.set['drone']['agent']['config']['drone_token'] = "ATTRagentTOKEN"
+        server.create_data_bag('vault_drone', 'drone_secret' => { 'drone_secret' => 'RANDOMagentTOKEN' })
+        node.set['drone']['agent']['config']['drone_secret'] = "ATTRagentTOKEN"
       end
       runner.converge(described_recipe)
     end
@@ -60,8 +60,8 @@ describe 'drone::agent' do
       end
 
       it 'sets secret for DRONE_TOKEN from vault' do
-        expect(agent_env).not_to include('DRONE_TOKEN=ATTRagentTOKEN')
-        expect(agent_env).to include('DRONE_TOKEN=RANDOMagentTOKEN')
+        expect(agent_env).not_to include('DRONE_SECRET=ATTRagentTOKEN')
+        expect(agent_env).to include('DRONE_SECRET=RANDOMagentTOKEN')
       end
     end
   end

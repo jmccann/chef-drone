@@ -9,7 +9,7 @@ describe 'drone::default' do
   context 'When all attributes are default, on an unspecified platform, getting secrets from attribtues' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new do |node, _server|
-        node.set['drone']['config']['drone_agent_secret'] = "ATTRagentSECRET"
+        node.set['drone']['config']['drone_secret'] = "ATTRagentSECRET"
       end
       runner.converge(described_recipe)
     end
@@ -53,7 +53,7 @@ describe 'drone::default' do
       end
 
       it 'sets DRONE_AGENT_SECRET from attr' do
-        expect(drone_env).to include('DRONE_AGENT_SECRET=ATTRagentSECRET')
+        expect(drone_env).to include('DRONE_SECRET=ATTRagentSECRET')
       end
 
       it 'is sensitive' do
@@ -66,7 +66,7 @@ describe 'drone::default' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new do |node, server|
         inject_databags server
-        node.set['drone']['config']['drone_agent_secret'] = "ATTRagentSECRET"
+        node.set['drone']['config']['drone_secret'] = "ATTRagentSECRET"
       end
       runner.converge(described_recipe)
     end
@@ -81,8 +81,8 @@ describe 'drone::default' do
       end
 
       it 'sets secret for DRONE_AGENT_SECRET from vault' do
-        expect(drone_env).not_to include('DRONE_AGENT_SECRET=ATTRagentSECRET')
-        expect(drone_env).to include('DRONE_AGENT_SECRET=RANDOMagentSECRET')
+        expect(drone_env).not_to include('DRONE_SECRET=ATTRagentSECRET')
+        expect(drone_env).to include('DRONE_SECRET=RANDOMagentSECRET')
       end
     end
   end
