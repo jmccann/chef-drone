@@ -1,5 +1,10 @@
 Drone Cookbook Changelog
 =========================
+v2.4.0
+------
+* Remove DEPRECATED drone token secrets management items
+* Added drone_secret support
+
 v2.3.0
 ------
 * Allow drone_github_client to be in a Vault
