@@ -8,8 +8,8 @@ server {
   listen 443 ssl;
   listen [::]:443 ssl;
 
-  ssl_certificate /etc/ssl/certs/drone.pem;
-  ssl_certificate_key /etc/ssl/private/drone.key;
+  ssl_certificate <%= @cert.cert_path %>;
+  ssl_certificate_key <%= @cert.key_path %>;
 
   server_name <%= node['fqdn'] %>;
 
