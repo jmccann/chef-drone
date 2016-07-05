@@ -82,3 +82,22 @@ Other optional items include:
 ## Docker
 
 See `attributes/docker.rb` for more options.
+
+## Testing
+
+* Linting - Rubocop and Foodcritic
+* Spec - ChefSpec
+* Integration - Test Kitchen
+
+Testing requires [ChefDK](https://downloads.chef.io/chef-dk/) be installed using it's native gems.
+
+```
+gem install docker-api
+foodcritic -f any -X spec .
+rubocop
+rspec --color --format progress
+```
+
+If you run into issues testing please first remove any additional gems you may
+have installed into your ChefDK environment.  Extra gems can be found and removed
+at `~/.chefdk/gem`.
