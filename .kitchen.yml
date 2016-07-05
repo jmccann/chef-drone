@@ -13,18 +13,23 @@ provisioner:
 
 platforms:
   - name: ubuntu-15.10
+    run_list:
+      - recipe[ubuntu::default]
   - name: ubuntu-16.04
+    run_list:
+      - recipe[ubuntu::default]
+  - name: centos-7.2
+    run_list:
+      - recipe[yum-epel::default]
 
 suites:
   - name: default
     run_list:
-      - recipe[ubuntu::default]
       - recipe[drone::default]
       - recipe[drone::reverse_proxy]
 
   - name: drone05
     run_list:
-      - recipe[ubuntu::default]
       - recipe[drone::default]
       - recipe[drone::agent]
       - recipe[drone::reverse_proxy]
