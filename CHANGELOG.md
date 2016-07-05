@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v2.5.0
+------
+* Support for CentOS 7.x
+
 v2.4.0
 ------
 * Remove DEPRECATED drone token secrets management items
