@@ -17,6 +17,7 @@ This cookbook is tested against:
 
 * Ubuntu 15.10
 * Ubuntu 16.04
+* CentOS 7.x
 
 ...but it might work on other platforms.
 

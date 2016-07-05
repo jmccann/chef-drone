@@ -14,3 +14,4 @@ depends 'nginx', '~> 2.7'
 depends 'ssl_certificate', '~> 1.12'
 
 supports 'ubuntu', '>= 14.04'
+supports 'centos', '>= 7.1'
