@@ -7,7 +7,6 @@ end
 
 docker_service 'default' do
   version node['drone']['docker']['version']
-  install_method 'binary'
   retries 1
   retry_delay 20
   host node['drone']['docker']['hosts']
