@@ -6,10 +6,10 @@ description      'Installs/Configures Drone'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 source_url       'https://github.com/jmccann/chef-drone'
 issues_url       'https://github.com/jmccann/chef-drone/issues'
-version          '3.0.0'
+version          '3.0.1'
 
 depends 'chef-vault', '~> 1.3'
-depends 'docker', '~> 2.8.0'
+depends 'docker', '~> 2.9'
 depends 'nginx', '~> 2.7'
 depends 'ssl_certificate', '~> 1.12'
 

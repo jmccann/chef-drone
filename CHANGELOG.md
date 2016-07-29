@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v3.0.1
+------
+* Fix allowing user to specify docker version
+
 v3.0.0
 ------
 * BREAKING CHANGE (maybe): No longer pin version of docker to install by default.
