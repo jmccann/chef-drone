@@ -2,7 +2,8 @@ Drone Cookbook Changelog
 =========================
 v3.0.0
 ------
-* BREAKING CHANGE (maybe): No longer pin version of docker to install by default.  You still can do it if you want though.
+* BREAKING CHANGE (maybe): No longer pin version of docker to install by default.
+You still can do it if you want manually though.
 
 v2.5.0
 ------
