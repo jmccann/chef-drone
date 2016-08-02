@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v3.0.2
+------
+* Allow bypassing loading secrets on chef-vault failure (permissions)
+
 v3.0.1
 ------
 * Fix allowing user to specify docker version
