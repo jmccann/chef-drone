@@ -20,7 +20,7 @@ module ChefDrone
     #
     # Override attribute secrets if in Vault or DataBag
     #
-    def override_secret(current_env, item)
+    def override_secret(current_env, item) # rubocop:disable AbcSize
       return current_env unless secret_exist? item
 
       Chef::Log.info("Loading secret '#{node['drone']['vault']['bag']}/#{item}' ...")
