@@ -27,6 +27,11 @@ suites:
     run_list:
       - recipe[drone::default]
       - recipe[drone::reverse_proxy]
+    attributes:
+      drone:
+        docker:
+          daemon:
+            log_level: debug
 
   - name: drone05
     run_list:
@@ -46,4 +51,7 @@ suites:
           DRONE_GITHUB: true
           DRONE_GITHUB_CLIENT: GH_CLIENT
           DRONE_GITHUB_SECRET: GH_SECRET
+        docker:
+          daemon:
+            log_level: debug
         version: '0.5'

@@ -23,5 +23,9 @@ describe 'drone::_docker' do
     it 'installs docker' do
       expect(chef_run).to create_docker_service('default')
     end
+
+    it 'sets docker logging to info' do
+      expect(chef_run).to create_docker_service('default').with(log_level: :info)
+    end
   end
 end
