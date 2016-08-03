@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v3.1.0
+------
+* Add ability to set docker daemon logging level
+
 v3.0.2
 ------
 * Allow bypassing loading secrets on chef-vault failure (permissions)
