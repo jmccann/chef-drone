@@ -10,7 +10,7 @@ version          '3.1.0'
 
 depends 'chef-vault', '~> 1.3'
 depends 'docker', '~> 2.9'
-depends 'nginx', '~> 2.7'
+depends 'chef_nginx', '~> 2.9'
 depends 'ssl_certificate', '~> 1.12'
 
 supports 'ubuntu', '>= 14.04'
