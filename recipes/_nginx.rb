@@ -9,7 +9,7 @@ cert = ssl_certificate 'drone' do
 end
 
 # Install/Configure nginx
-include_recipe 'nginx::default'
+include_recipe 'chef_nginx::default'
 
 # Override their template with our own
 resources("template[#{node['nginx']['dir']}/sites-available/default]").cookbook 'drone'
