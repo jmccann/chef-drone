@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v3.1.2
+------
+* For newer version of Docker need to use new resource in docker cookbook for installing while specifying a version
+
 v3.1.1
 ------
 * Fix reverse proxy for Drone 0.5
