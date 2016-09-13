@@ -21,7 +21,7 @@ describe 'drone::worker' do
     end
 
     it 'exposed docker port for drone server' do
-      expect(chef_run).to create_docker_service('default').with(host: ['unix:///var/run/docker.sock', 'tcp://10.0.0.2:2376'])
+      expect(chef_run).to start_docker_service_manager('default').with(host: ['unix:///var/run/docker.sock', 'tcp://10.0.0.2:2376'])
     end
   end
 end

@@ -21,11 +21,11 @@ describe 'drone::_docker' do
     end
 
     it 'installs docker' do
-      expect(chef_run).to create_docker_service('default')
+      expect(chef_run).to create_docker_installation_tarball('default')
     end
 
     it 'sets docker logging to info' do
-      expect(chef_run).to create_docker_service('default').with(log_level: :info)
+      expect(chef_run).to start_docker_service_manager('default').with(log_level: :info)
     end
   end
 end
