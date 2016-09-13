@@ -17,6 +17,6 @@ before_script:
   - gem install docker-api -v 1.28.0
 
 script:
-  - rubocop
+  - cookstyle
   - foodcritic .
   - rspec
