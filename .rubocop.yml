@@ -13,3 +13,6 @@ StringLiterals:
 SpaceBeforeFirstArg:
   Exclude:
     - metadata.rb
+
+WordArray:
+  Enabled: false

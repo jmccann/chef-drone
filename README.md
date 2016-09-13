@@ -21,6 +21,8 @@ This cookbook is tested against:
 
 ...but it might work on other platforms.
 
+If installing and managing docker with this cookbook only version 1.11+ is supported.
+
 # Usage
 ## Recipes
 ### drone::default
@@ -83,6 +85,8 @@ Other optional items include:
 ## Docker
 
 See `attributes/docker.rb` for more options.
+
+**Note:** There is no ability to control docker version on RHEL based platforms.
 
 ## Testing
 
