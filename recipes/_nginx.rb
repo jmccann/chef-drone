@@ -1,5 +1,4 @@
 cert = ssl_certificate 'drone' do
-  common_name 'target.com'
   source 'chef-vault'
   bag node['drone']['vault']['bag']
   key_item 'certs'
