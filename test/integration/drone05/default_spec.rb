@@ -11,10 +11,7 @@ describe port(443) do
 end
 describe file('/etc/nginx/sites-available/default') do
   its(:content) { should match(/proxy_set_header Upgrade \$http_upgrade;/) }
-  its(:content) { should match(/proxy_set_header Connection \$connection_upgrade;/) }
-
-  its(:content) { should_not include('proxy_buffering off;') }
-  its(:content) { should_not include('chunked_transfer_encoding off;') }
+  its(:content) { should match(/proxy_set_header Connection "upgrade"/) }
 end
 
 # drone
@@ -30,6 +27,5 @@ end
 # No logs from agent (meaning no errors)
 describe command("docker logs agent") do
   its(:exit_status) { should eq 0 }
-  its(:stdout) { should eq '' }
-  its(:stderr) { should eq '' }
+  its(:stderr) { should include('connection establish, ready to process builds') }
 end
