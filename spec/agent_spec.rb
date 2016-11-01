@@ -27,8 +27,8 @@ describe 'drone::agent' do
         chef_run.docker_container('agent').env
       end
 
-      it 'does not set database driver' do
-        expect(agent_env).to include('DRONE_SERVER=http://localhost')
+      it 'sets DRONE_SERVER from attribute' do
+        expect(agent_env).to include('DRONE_SERVER=ws://localhost/ws/broker')
       end
 
       it 'sets DRONE_TOKEN from attribute' do

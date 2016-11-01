@@ -28,9 +28,9 @@ describe 'drone::reverse_proxy' do
     end
 
     it 'installs SSL cert' do
-      expect(chef_run).to create_ssl_certificate('drone').with(common_name: 'target.com', source: 'chef-vault',
-                                                               bag: 'vault_drone', key_item: 'certs', key_item_key: 'key',
-                                                               cert_item: 'certs', cert_item_key: 'cert')
+      expect(chef_run).to create_ssl_certificate('drone')
+        .with(source: 'chef-vault', bag: 'vault_drone', key_item: 'certs',
+              key_item_key: 'key', cert_item: 'certs', cert_item_key: 'cert')
     end
 
     it 'binds drone port to 8000 instead of 80, freeing for webserver' do
