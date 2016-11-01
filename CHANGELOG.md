@@ -1,5 +1,10 @@
 Drone Cookbook Changelog
 =========================
+v3.1.3
+------
+* Update to work with Drone 0.5 new server <> agent commication protocol
+ * http://readme.drone.io/0.5/installation/agents
+
 v3.1.2
 ------
 * For newer version of Docker need to use new resource in docker cookbook for installing while specifying a version
