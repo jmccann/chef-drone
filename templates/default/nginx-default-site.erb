@@ -28,6 +28,15 @@ server {
 
   root /var/www/html;
   index index.html index.htm;
+<% if node['drone']['disable_repo_activation'] -%>
+
+  # Deny activation of new repos
+  location ~ ^/(api/)?repos/[-._A-Za-z0-9]+/[-._A-Za-z0-9]+[/]?$ {
+    limit_except GET PATCH DELETE {
+      deny  all;
+    }
+  }
+<% end -%>
 
   location / {
     proxy_set_header X-Real-IP $remote_addr;

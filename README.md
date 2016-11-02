@@ -59,6 +59,7 @@ Attribute | Description | Type | Default
 `node['drone']['vault']['bag']` | Name of vault with secrets | String | Default is `'vault_drone'`.  See [Vault](#vault) section below.
 `node['drone']['config']` | Hash of Drone ENV configuration options | Hash | See [Configuration](#configuration) section below.
 `node['drone']['agent']['config']` | Hash of configuration options for Drone Agent | Hash | See [Configuration](#configuration) section below.
+`node['drone']['disable_repo_activation']` | Block ability to activate new repos through reverse proxy.  Useful for trying to stop people from using an old Drone env. | Boolean | `false`
 
 ## Configuration
 

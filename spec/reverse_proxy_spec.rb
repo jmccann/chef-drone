@@ -6,7 +6,7 @@
 require 'spec_helper'
 
 describe 'drone::reverse_proxy' do
-  context 'When all attributes are default, on an unspecified platform' do
+  context 'When all attributes are default, on ubuntu' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |_node, server|
         inject_databags server
@@ -35,6 +35,34 @@ describe 'drone::reverse_proxy' do
 
     it 'binds drone port to 8000 instead of 80, freeing for webserver' do
       expect(chef_run).to run_docker_container('drone').with(port: '8000:8000')
+    end
+
+    it 'does not disable repo activation' do
+      expect(chef_run).not_to render_file('/etc/nginx/sites-available/default').with_content '# Deny activation of new repos'
+    end
+  end
+
+  context 'When some attributes are overriden, on ubuntu' do
+    cached(:chef_run) do
+      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, server|
+        node.set['drone']['disable_repo_activation'] = true
+
+        inject_databags server
+      end
+      runner.converge(described_recipe)
+    end
+
+    before do
+      # nginx cookbook stubbing
+      stub_command('which nginx').and_return(false)
+    end
+
+    it 'converges successfully' do
+      chef_run # This should not raise an error
+    end
+
+    it 'disables repo activation' do
+      expect(chef_run).to render_file('/etc/nginx/sites-available/default').with_content '# Deny activation of new repos'
     end
   end
 end
