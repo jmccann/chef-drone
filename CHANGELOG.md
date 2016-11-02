@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v3.2.0
+------
+* Allow setting node attribute `node['drone']['disable_repo_activation']` to disable ability to activate new repos
+
 v3.1.3
 ------
 * Update to work with Drone 0.5 new server <> agent commication protocol
