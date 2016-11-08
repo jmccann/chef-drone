@@ -30,6 +30,23 @@ server {
   index index.html index.htm;
 <% if node['drone']['disable_repo_activation'] -%>
 
+<% node['drone']['repo_activation_org_whitelist'].each do |org| -%>
+  # Allow activatation of new repos for whitelisted org <%= org %>
+  location ~ ^/(api/)?repos/<%= org %>/[-._A-Za-z0-9]+[/]?$ {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Host $http_host;
+
+    proxy_pass http://drone;
+    proxy_redirect off;
+    proxy_http_version 1.1;
+
+    proxy_buffering off;
+    chunked_transfer_encoding off;
+  }
+<% end -%>
+
   # Deny activation of new repos
   location ~ ^/(api/)?repos/[-._A-Za-z0-9]+/[-._A-Za-z0-9]+[/]?$ {
     limit_except GET PATCH DELETE {

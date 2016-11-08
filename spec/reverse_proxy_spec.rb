@@ -40,12 +40,17 @@ describe 'drone::reverse_proxy' do
     it 'does not disable repo activation' do
       expect(chef_run).not_to render_file('/etc/nginx/sites-available/default').with_content '# Deny activation of new repos'
     end
+
+    it 'does not enable repo activation for whitelisted orgs' do
+      expect(chef_run).not_to render_file('/etc/nginx/sites-available/default').with_content '# Allow activatation of new repos for whitelisted org'
+    end
   end
 
   context 'When some attributes are overriden, on ubuntu' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, server|
         node.set['drone']['disable_repo_activation'] = true
+        node.set['drone']['repo_activation_org_whitelist'] = ['test_org']
 
         inject_databags server
       end
@@ -63,6 +68,10 @@ describe 'drone::reverse_proxy' do
 
     it 'disables repo activation' do
       expect(chef_run).to render_file('/etc/nginx/sites-available/default').with_content '# Deny activation of new repos'
+    end
+
+    it 'allows repo activation for specified org' do
+      expect(chef_run).to render_file('/etc/nginx/sites-available/default').with_content '# Allow activatation of new repos for whitelisted org test_org'
     end
   end
 end
