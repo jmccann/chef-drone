@@ -8,7 +8,7 @@ require 'spec_helper'
 describe 'drone::agent' do
   context 'When all attributes are default, on an unspecified platform, getting secrets from attribtues' do
     cached(:chef_run) do
-      runner = ChefSpec::ServerRunner.new do |node, _server|
+      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
         node.default['drone']['agent']['config']['drone_secret'] = "ATTRagentTOKEN"
       end
       runner.converge(described_recipe)
@@ -43,7 +43,7 @@ describe 'drone::agent' do
 
   context 'When all attributes are default, on an unspecified platform, getting secrets from vault' do
     cached(:chef_run) do
-      runner = ChefSpec::ServerRunner.new do |node, server|
+      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, server|
         server.create_data_bag('vault_drone', 'drone_secret' => { 'drone_secret' => 'RANDOMagentTOKEN' })
         node.default['drone']['agent']['config']['drone_secret'] = "ATTRagentTOKEN"
       end
