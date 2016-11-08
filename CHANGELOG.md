@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v3.3.0
+------
+* Allow setting node attributes `node['drone']['repo_activation_org_whitelist']` to whitelist orgs for repo activation when `node['drone']['disable_repo_activation']` is set to `true`
+
 v3.2.0
 ------
 * Allow setting node attribute `node['drone']['disable_repo_activation']` to disable ability to activate new repos
