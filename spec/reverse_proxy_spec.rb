@@ -49,8 +49,8 @@ describe 'drone::reverse_proxy' do
   context 'When some attributes are overriden, on ubuntu' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, server|
-        node.set['drone']['disable_repo_activation'] = true
-        node.set['drone']['repo_activation_org_whitelist'] = ['test_org']
+        node.normal['drone']['disable_repo_activation'] = true
+        node.normal['drone']['repo_activation_org_whitelist'] = ['test_org']
 
         inject_databags server
       end
