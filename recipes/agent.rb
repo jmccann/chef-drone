@@ -2,12 +2,12 @@ include_recipe 'chef-vault::default'
 include_recipe 'drone::_docker'
 
 docker_image 'agent' do
-  repo 'drone/drone'
+  repo node['drone']['repo']
   tag node['drone']['version']
 end
 
 docker_container 'agent' do
-  repo 'drone/drone'
+  repo node['drone']['repo']
   tag node['drone']['version']
   command 'agent'
   env agent_env

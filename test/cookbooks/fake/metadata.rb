@@ -1,0 +1,11 @@
+name             'fake'
+maintainer       'Jacob McCann'
+maintainer_email 'jmccann.git@gmail.com'
+license          'Apache 2.0'
+description      'Installs/Configures Drone'
+long_description 'Installs/Configures Drone'
+source_url       'https://github.com/jmccann/chef-drone'
+issues_url       'https://github.com/jmccann/chef-drone/issues'
+version          '0.1.0'
+
+depends 'gogs'

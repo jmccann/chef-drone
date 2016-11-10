@@ -4,12 +4,12 @@ include_recipe 'chef-vault::default'
 include_recipe 'drone::_docker'
 
 docker_image 'drone' do
-  repo 'drone/drone'
+  repo node['drone']['repo']
   tag node['drone']['version']
 end
 
 docker_container 'drone' do
-  repo 'drone/drone'
+  repo node['drone']['repo']
   tag node['drone']['version']
   port '80:8000'
   env drone_env

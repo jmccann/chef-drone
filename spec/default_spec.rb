@@ -6,9 +6,9 @@
 require 'spec_helper'
 
 describe 'drone::default' do
-  context 'When all attributes are default, on an unspecified platform, getting secrets from attribtues' do
+  context 'When all attributes are default, on ubuntu, getting secrets from attribtues' do
     cached(:chef_run) do
-      runner = ChefSpec::ServerRunner.new do |node, _server|
+      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
         node.default['drone']['config']['drone_secret'] = "ATTRagentSECRET"
       end
       runner.converge(described_recipe)
@@ -19,7 +19,7 @@ describe 'drone::default' do
     end
 
     it 'creates drone container' do
-      expect(chef_run).to run_docker_container('drone').with(tag: '0.4')
+      expect(chef_run).to run_docker_container('drone').with(repo: 'drone/drone', tag: '0.4')
     end
 
     describe 'drone container environment' do
@@ -62,9 +62,9 @@ describe 'drone::default' do
     end
   end
 
-  context 'When all attributes are default, on an unspecified platform, getting secrets from vault' do
+  context 'When all attributes are default, on ubuntu, getting secrets from vault' do
     cached(:chef_run) do
-      runner = ChefSpec::ServerRunner.new do |node, server|
+      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, server|
         inject_databags server
         node.default['drone']['config']['drone_secret'] = "ATTRagentSECRET"
       end
@@ -84,6 +84,28 @@ describe 'drone::default' do
         expect(drone_env).not_to include('DRONE_SECRET=ATTRagentSECRET')
         expect(drone_env).to include('DRONE_SECRET=RANDOMagentSECRET')
       end
+    end
+  end
+
+  context 'When attributes are set, on ubuntu' do
+    cached(:chef_run) do
+      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
+        node.normal['drone']['repo'] = 'jmccann/drone'
+        node.normal['drone']['version'] = '0.5'
+      end
+      runner.converge(described_recipe)
+    end
+
+    it 'converges successfully' do
+      chef_run # This should not raise an error
+    end
+
+    it 'installs drone from a different repo' do
+      expect(chef_run).to run_docker_container('drone').with(repo: 'jmccann/drone')
+    end
+
+    it 'installs a different version of drone' do
+      expect(chef_run).to run_docker_container('drone').with(tag: '0.5')
     end
   end
 end

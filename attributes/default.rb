@@ -1,3 +1,4 @@
+default['drone']['repo'] = 'drone/drone'
 default['drone']['version'] = '0.4'
 default['drone']['vault']['bag'] = 'vault_drone'
 default['drone']['disable_repo_activation'] = false
