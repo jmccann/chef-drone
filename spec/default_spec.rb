@@ -22,7 +22,7 @@ describe 'drone::default' do
       expect(chef_run).to run_docker_container('drone')
         .with(repo: 'drone/drone', tag: '0.4', port: '80:8000',
               volumes_binds: ['/var/lib/drone:/var/lib/drone',
-                        '/var/run/docker.sock:/var/run/docker.sock'])
+                              '/var/run/docker.sock:/var/run/docker.sock'])
     end
 
     describe 'drone container environment' do
