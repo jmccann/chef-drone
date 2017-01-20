@@ -1,5 +1,11 @@
 Drone Cookbook Changelog
 =========================
+v3.6.0
+------
+* Allow specifying volumes to mount into Drone from host with `node['drone']['server']['volumes']`
+* Minor Breaking: specifying host port to bind Drone to with `node['drone']['server']['port']`
+  * Decided to do this since 3.5.0 has been released for 30min now and this makes more sense and don't wanna major version bump.  Sorry!
+
 v3.5.0
 ------
 * Allow specifying host port to bind Drone to with `node['drone']['port']`
