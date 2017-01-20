@@ -19,7 +19,7 @@ describe 'drone::default' do
     end
 
     it 'creates drone container' do
-      expect(chef_run).to run_docker_container('drone').with(repo: 'drone/drone', tag: '0.4')
+      expect(chef_run).to run_docker_container('drone').with(repo: 'drone/drone', tag: '0.4', port: '80:8000')
     end
 
     describe 'drone container environment' do
@@ -90,6 +90,7 @@ describe 'drone::default' do
   context 'When attributes are set, on ubuntu' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
+        node.normal['drone']['port'] = '443'
         node.normal['drone']['repo'] = 'jmccann/drone'
         node.normal['drone']['version'] = '0.5'
       end
@@ -106,6 +107,10 @@ describe 'drone::default' do
 
     it 'installs a different version of drone' do
       expect(chef_run).to run_docker_container('drone').with(tag: '0.5')
+    end
+
+    it 'runs drone on a different port' do
+      expect(chef_run).to run_docker_container('drone').with(port: '443:8000')
     end
   end
 end

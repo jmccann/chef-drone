@@ -11,7 +11,7 @@ end
 docker_container 'drone' do
   repo node['drone']['repo']
   tag node['drone']['version']
-  port '80:8000'
+  port "#{node['drone']['port']}:8000"
   env drone_env
   volumes ['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock']
   restart_policy 'always'
