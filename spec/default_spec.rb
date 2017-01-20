@@ -19,7 +19,10 @@ describe 'drone::default' do
     end
 
     it 'creates drone container' do
-      expect(chef_run).to run_docker_container('drone').with(repo: 'drone/drone', tag: '0.4', port: '80:8000')
+      expect(chef_run).to run_docker_container('drone')
+        .with(repo: 'drone/drone', tag: '0.4', port: '80:8000',
+              volumes_binds: ['/var/lib/drone:/var/lib/drone',
+                        '/var/run/docker.sock:/var/run/docker.sock'])
     end
 
     describe 'drone container environment' do
@@ -90,9 +93,10 @@ describe 'drone::default' do
   context 'When attributes are set, on ubuntu' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
-        node.normal['drone']['port'] = '443'
         node.normal['drone']['repo'] = 'jmccann/drone'
         node.normal['drone']['version'] = '0.5'
+        node.normal['drone']['server']['port'] = '443'
+        node.normal['drone']['server']['volumes'] = ['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock', '/etc/ssl/certs/drone.pem:/etc/ssl/certs/drone.pem', '/etc/ssl/private/drone.key:/etc/ssl/private/drone.key']
       end
       runner.converge(described_recipe)
     end
@@ -111,6 +115,13 @@ describe 'drone::default' do
 
     it 'runs drone on a different port' do
       expect(chef_run).to run_docker_container('drone').with(port: '443:8000')
+    end
+
+    it 'runs drone with different volumes' do
+      expect(chef_run).to run_docker_container('drone')
+        .with(volumes_binds: ['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock',
+                              '/etc/ssl/certs/drone.pem:/etc/ssl/certs/drone.pem',
+                              '/etc/ssl/private/drone.key:/etc/ssl/private/drone.key'])
     end
   end
 end

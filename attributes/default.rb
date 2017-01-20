@@ -3,7 +3,8 @@ default['drone']['version'] = '0.4'
 default['drone']['vault']['bag'] = 'vault_drone'
 default['drone']['disable_repo_activation'] = false
 default['drone']['repo_activation_org_whitelist'] = []
-default['drone']['port'] = 80
+default['drone']['server']['port'] = 80
+default['drone']['server']['volumes'] = ['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock']
 
 # database configuration
 #

@@ -57,7 +57,8 @@ Attribute | Description | Type | Default
 ----------|-------------|------|--------
 `node['drone']['repo']` | Docker repo to pull Drone from | String | `'drone/drone'`
 `node['drone']['version']` | Version of Drone | String | `'0.4'`
-`node['drone']['port']` | Host port to bind drone to | Integer | `80`
+`node['drone']['server']['port']` | Host port to bind drone to | Integer | `80`
+`node['drone']['server']['volumes']` | Volumes to mount to drone from host | Array | `['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock']`
 `node['drone']['vault']['bag']` | Name of vault with secrets | String | `'vault_drone'`.  See [Vault](#vault) section below.
 `node['drone']['config']` | Hash of Drone ENV configuration options | Hash | See [Configuration](#configuration) section below.
 `node['drone']['agent']['config']` | Hash of configuration options for Drone Agent | Hash | See [Configuration](#configuration) section below.
