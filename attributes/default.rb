@@ -1,5 +1,5 @@
 default['drone']['repo'] = 'drone/drone'
-default['drone']['version'] = '0.4'
+default['drone']['version'] = '0.4.2'
 default['drone']['vault']['bag'] = 'vault_drone'
 default['drone']['disable_repo_activation'] = false
 default['drone']['repo_activation_org_whitelist'] = []
