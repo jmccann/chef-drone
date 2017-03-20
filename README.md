@@ -15,7 +15,6 @@ More information also @ http://readme.drone.io.
 
 This cookbook is tested against:
 
-* Ubuntu 15.10
 * Ubuntu 16.04
 * CentOS 7.x
 
