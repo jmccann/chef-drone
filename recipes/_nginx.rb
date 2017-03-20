@@ -10,9 +10,9 @@ end
 # Install/Configure nginx
 include_recipe 'chef_nginx::default'
 
-# Override their template with our own
-resources("template[#{node['nginx']['dir']}/sites-available/default]").cookbook 'drone'
-resources("template[#{node['nginx']['dir']}/sites-available/default]").source 'nginx-default-site.erb'
-resources("template[#{node['nginx']['dir']}/sites-available/default]").variables(
-  cert: cert
-)
+node.default['nginx']['default_site_enabled'] = false
+
+nginx_site 'default' do
+  template 'drone.erb'
+  variables cert: cert
+end

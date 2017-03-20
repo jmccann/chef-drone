@@ -12,9 +12,6 @@ provisioner:
   name: chef_zero
 
 platforms:
-  - name: ubuntu-15.10
-    run_list:
-      - recipe[ubuntu::default]
   - name: ubuntu-16.04
     run_list:
       - recipe[ubuntu::default]
@@ -82,7 +79,6 @@ suites:
 
   - name: drone-custom
     excludes:
-      - ubuntu-15.10
       - centos-7.2
     driver:
       network:
