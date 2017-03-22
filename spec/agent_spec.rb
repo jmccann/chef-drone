@@ -19,7 +19,7 @@ describe 'drone::agent' do
     end
 
     it 'creates agent container' do
-      expect(chef_run).to run_docker_container('agent').with(repo: 'drone/drone', tag: '0.4')
+      expect(chef_run).to run_docker_container('agent').with(repo: 'drone/drone', tag: '0.4.2')
     end
 
     describe 'agent container environment' do
