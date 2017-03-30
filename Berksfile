@@ -1,9 +1,11 @@
-source "https://supermarket.getchef.com"
+source "https://supermarket.chef.io"
 
 metadata
 
-cookbook 'fake', path: 'test/cookbooks/fake'
+group :test, :development do
+  cookbook 'fake', path: 'test/cookbooks/fake'
 
-cookbook 'ubuntu', '~> 2.0'
-cookbook 'yum-epel', '~> 1.0'
-cookbook 'gogs', '~> 0.1'
+  cookbook 'gogs',     '~> 0.1'
+  cookbook 'ubuntu',   '~> 2.0'
+  cookbook 'yum-epel', '~> 2.0'
+end
