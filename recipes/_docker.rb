@@ -12,7 +12,8 @@ docker_installation_script 'default' do
 end
 
 docker_installation_tarball 'default' do
-  version node['drone']['docker']['version']
+  checksum node['drone']['docker']['checksum'] unless node['drone']['docker']['checksum'].nil?
+  version node['drone']['docker']['version'] unless node['drone']['docker']['version'].nil?
   only_if { ['debian', 'ubuntu'].include?(node['platform']) }
 end
 

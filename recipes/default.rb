@@ -15,7 +15,7 @@ docker_container 'drone' do
   env drone_env
   volumes node['drone']['server']['volumes']
   restart_policy 'always'
-  log_driver node['drone']['docker']['log_driver']
+  log_driver node['drone']['docker']['log_driver'] unless node['drone']['docker']['log_driver'].nil?
   log_opts node['drone']['docker']['log_opts']
   sensitive true
 end
