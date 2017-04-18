@@ -1,11 +1,12 @@
 name             'drone'
 maintainer       'Jacob McCann'
 maintainer_email 'jmccann.git@gmail.com'
-license          'Apache 2.0'
+license          'Apache-2.0'
 description      'Installs/Configures Drone'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 source_url       'https://github.com/jmccann/chef-drone'
 issues_url       'https://github.com/jmccann/chef-drone/issues'
+chef_version     '>= 12.0.0'
 version          '3.6.0'
 
 depends 'chef-vault', '~> 1.3'
