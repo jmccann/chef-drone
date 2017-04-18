@@ -75,65 +75,66 @@ suites:
           daemon:
             log_level: debug
           version: '1.12.6'
+          checksum: 'cadc6025c841e034506703a06cf54204e51d0cadfae4bae62628ac648d82efdd'
         version: '0.5'
 
-  - name: drone-custom
-    excludes:
-      - ubuntu-15.10
-      - centos-7.2
-    driver:
-      network:
-        - ["forwarded_port", {guest: 8080, host: 8080}]
-        - ["forwarded_port", {guest: 443, host: 9443}]
-    run_list:
-      - recipe[gogs::default]
-      - recipe[fake::gogs]
-      - recipe[drone::default]
-      - recipe[drone::agent]
-      - recipe[drone::reverse_proxy]
-    attributes:
-      drone:
-        agent:
-          config:
-            I_UNDERSTAND_I_AM_USING_AN_UNSTABLE_VERSION: true
-            I_AGREE_TO_FIX_BUGS_AND_NOT_FILE_BUGS: true
-            drone_server: http://10.0.2.15:8000
-        config:
-          drone_debug: true
-          drone_gogs: true
-          drone_gogs_url: http://10.0.2.15:8080
-          drone_open: true
-          I_UNDERSTAND_I_AM_USING_AN_UNSTABLE_VERSION: true
-          I_AGREE_TO_FIX_BUGS_AND_NOT_FILE_BUGS: true
-        docker:
-          daemon:
-            log_level: debug
-        repo: jmccann/drone
-        version: '0.5.1'
-      gogs:
-        version: '0.9.97'
-
-  # Useful for testing reverse proxy stuff
-  - name: gogs-setup
-    excludes:
-      - ubuntu-15.10
-      - centos-7.2
-    driver:
-      network:
-        - ["forwarded_port", {guest: 8080, host: 8080}]
-        - ["forwarded_port", {guest: 443, host: 9443}]
-    run_list:
-      - recipe[gogs::default]
-      - recipe[drone::default]
-      - recipe[drone::reverse_proxy]
-    attributes:
-      drone:
-        config:
-          remote_driver: gogs
-          remote_config: http://10.0.2.15:8080?open=true
-        disable_repo_activation: true
-        docker:
-          daemon:
-            log_level: debug
-        repo_activation_org_whitelist:
-          - test_org
+  # - name: drone-custom
+  #   excludes:
+  #     - ubuntu-15.10
+  #     - centos-7.2
+  #   driver:
+  #     network:
+  #       - ["forwarded_port", {guest: 8080, host: 8080}]
+  #       - ["forwarded_port", {guest: 443, host: 9443}]
+  #   run_list:
+  #     - recipe[gogs::default]
+  #     - recipe[fake::gogs]
+  #     - recipe[drone::default]
+  #     - recipe[drone::agent]
+  #     - recipe[drone::reverse_proxy]
+  #   attributes:
+  #     drone:
+  #       agent:
+  #         config:
+  #           I_UNDERSTAND_I_AM_USING_AN_UNSTABLE_VERSION: true
+  #           I_AGREE_TO_FIX_BUGS_AND_NOT_FILE_BUGS: true
+  #           drone_server: http://10.0.2.15:8000
+  #       config:
+  #         drone_debug: true
+  #         drone_gogs: true
+  #         drone_gogs_url: http://10.0.2.15:8080
+  #         drone_open: true
+  #         I_UNDERSTAND_I_AM_USING_AN_UNSTABLE_VERSION: true
+  #         I_AGREE_TO_FIX_BUGS_AND_NOT_FILE_BUGS: true
+  #       docker:
+  #         daemon:
+  #           log_level: debug
+  #       repo: jmccann/drone
+  #       version: '0.5.1'
+  #     gogs:
+  #       version: '0.9.97'
+  #
+  # # Useful for testing reverse proxy stuff
+  # - name: gogs-setup
+  #   excludes:
+  #     - ubuntu-15.10
+  #     - centos-7.2
+  #   driver:
+  #     network:
+  #       - ["forwarded_port", {guest: 8080, host: 8080}]
+  #       - ["forwarded_port", {guest: 443, host: 9443}]
+  #   run_list:
+  #     - recipe[gogs::default]
+  #     - recipe[drone::default]
+  #     - recipe[drone::reverse_proxy]
+  #   attributes:
+  #     drone:
+  #       config:
+  #         remote_driver: gogs
+  #         remote_config: http://10.0.2.15:8080?open=true
+  #       disable_repo_activation: true
+  #       docker:
+  #         daemon:
+  #           log_level: debug
+  #       repo_activation_org_whitelist:
+  #         - test_org
