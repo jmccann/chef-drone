@@ -17,7 +17,7 @@ describe 'drone::_docker' do
     end
 
     it 'installs kernel extras for aufs' do
-      expect(chef_run).to install_package 'linux-image-extra-4.4.0-21-generic'
+      expect(chef_run).to install_package 'linux-image-extra-4.4.0-53-generic'
     end
 
     it 'installs docker' do
