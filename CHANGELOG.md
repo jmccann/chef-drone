@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v3.6.1
+------
+* Updates to work properly in Chef 13
+
 v3.6.0
 ------
 * Allow specifying volumes to mount into Drone from host with `node['drone']['server']['volumes']`
