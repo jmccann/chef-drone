@@ -68,7 +68,7 @@ server {
     proxy_buffering off;
     chunked_transfer_encoding off;
   }
-<% unless node['drone']['version'] == '0.4' -%>
+<% unless %w(0.4 0.4.0 0.4.1 0.4.2).include?(node['drone']['version']) -%>
 
   # Handle WebSockets by catching all /ws (case-insensitive) and upgrade the connection.
   location ~* /ws {
