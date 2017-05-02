@@ -19,7 +19,7 @@ describe 'drone::agent' do
     end
 
     it 'creates agent container' do
-      expect(chef_run).to run_docker_container('agent').with(repo: 'drone/drone', tag: '0.4.2')
+      expect(chef_run).to run_docker_container('agent').with(repo: 'drone/drone', tag: '0.5')
     end
 
     describe 'agent container environment' do
@@ -70,7 +70,7 @@ describe 'drone::agent' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
         node.normal['drone']['repo'] = 'jmccann/drone'
-        node.normal['drone']['version'] = '0.5'
+        node.normal['drone']['version'] = '0.6'
       end
       runner.converge(described_recipe)
     end
@@ -84,7 +84,7 @@ describe 'drone::agent' do
     end
 
     it 'installs a different version of drone' do
-      expect(chef_run).to run_docker_container('agent').with(tag: '0.5')
+      expect(chef_run).to run_docker_container('agent').with(tag: '0.6')
     end
   end
 end

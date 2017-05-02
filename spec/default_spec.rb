@@ -20,7 +20,7 @@ describe 'drone::default' do
 
     it 'creates drone container' do
       expect(chef_run).to run_docker_container('drone')
-        .with(repo: 'drone/drone', tag: '0.4.2', port: '80:8000',
+        .with(repo: 'drone/drone', tag: '0.5', port: '80:8000',
               volumes_binds: ['/var/lib/drone:/var/lib/drone',
                               '/var/run/docker.sock:/var/run/docker.sock'])
     end
@@ -31,28 +31,11 @@ describe 'drone::default' do
       end
 
       it 'does not set database driver' do
-        expect(drone_env).to include('DATABASE_DRIVER=sqlite3')
+        expect(drone_env).to include('DRONE_DATABASE_DRIVER=sqlite3')
       end
 
       it 'does not set database config' do
-        expect(drone_env).to include('DATABASE_CONFIG=/var/lib/drone/drone.sqlite')
-      end
-
-      it 'sets remote driver' do
-        expect(drone_env).to include('REMOTE_DRIVER=github')
-      end
-
-      it 'sets remote config' do
-        expect(drone_env).to include('REMOTE_CONFIG=https://github.com?client_id=${CLIENT}&client_secret=${SECRET}')
-      end
-
-      it 'sets drone docker hosts' do
-        expect(drone_env).to include('DOCKER_HOST_1=unix:///var/run/docker.sock')
-        expect(drone_env).to include('DOCKER_HOST_2=unix:///var/run/docker.sock')
-      end
-
-      it 'sets PLUGIN_FILTER' do
-        expect(drone_env).to include('PLUGIN_FILTER=plugins/*')
+        expect(drone_env).to include('DRONE_DATABASE_CONFIG=/var/lib/drone/drone.sqlite')
       end
 
       it 'sets DRONE_AGENT_SECRET from attr' do
@@ -94,7 +77,7 @@ describe 'drone::default' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
         node.normal['drone']['repo'] = 'jmccann/drone'
-        node.normal['drone']['version'] = '0.5'
+        node.normal['drone']['version'] = '0.6'
         node.normal['drone']['server']['port'] = '443'
         node.normal['drone']['server']['volumes'] = ['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock', '/etc/ssl/certs/drone.pem:/etc/ssl/certs/drone.pem', '/etc/ssl/private/drone.key:/etc/ssl/private/drone.key']
       end
@@ -110,7 +93,7 @@ describe 'drone::default' do
     end
 
     it 'installs a different version of drone' do
-      expect(chef_run).to run_docker_container('drone').with(tag: '0.5')
+      expect(chef_run).to run_docker_container('drone').with(tag: '0.6')
     end
 
     it 'runs drone on a different port' do
