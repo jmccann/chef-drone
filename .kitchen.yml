@@ -69,6 +69,25 @@ suites:
             log_level: debug
           version: '17.04.0'
 
+  - name: drone-0.6
+    run_list:
+      - recipe[drone::default]
+      - recipe[drone::agent]
+    attributes:
+      drone:
+        agent:
+          config:
+            drone_server: ws://10.0.2.15/ws/broker
+        config:
+          DRONE_HOST: http://10.0.2.15
+          DRONE_GITHUB: true
+          DRONE_GITHUB_CLIENT: GH_CLIENT
+          DRONE_GITHUB_SECRET: GH_SECRET
+        docker:
+          daemon:
+            log_level: debug
+        version: '0.6'
+
   # - name: drone-custom
   #   excludes:
   #     - ubuntu-15.10
