@@ -14,5 +14,5 @@ depends 'docker', '~> 2.9'
 depends 'chef_nginx', '~> 6.0'
 depends 'ssl_certificate', '~> 1.12'
 
-supports 'ubuntu', '>= 14.04'
+supports 'ubuntu', '>= 16.04'
 supports 'centos', '>= 7.1'

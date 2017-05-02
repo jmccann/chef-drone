@@ -12,16 +12,18 @@ provisioner:
   name: chef_zero
 
 platforms:
-  - name: ubuntu-16.04-chef-latest
+  - name: ubuntu-16.04
     driver:
       box: bento/ubuntu-16.04
     run_list:
       - recipe[ubuntu::default]
-  - name: centos-chef-latest
+      - recipe[chef-apt-docker::default]
+  - name: centos
     driver:
       box: bento/centos-7.2
     run_list:
       - recipe[yum-epel::default]
+      - recipe[chef-yum-docker::default]
 
 suites:
   - name: drone-0.5
@@ -45,7 +47,7 @@ suites:
           daemon:
             log_level: debug
 
-  - name: drone-0.5-docker-1.12.6
+  - name: drone-0.5-docker-17.04.0
     run_list:
       - recipe[drone::default]
       - recipe[drone::agent]
@@ -65,8 +67,7 @@ suites:
         docker:
           daemon:
             log_level: debug
-          version: '1.12.6'
-          checksum: 'cadc6025c841e034506703a06cf54204e51d0cadfae4bae62628ac648d82efdd'
+          version: '17.04.0'
 
   # - name: drone-custom
   #   excludes:
