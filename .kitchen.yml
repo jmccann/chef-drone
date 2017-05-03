@@ -94,7 +94,7 @@ suites:
     driver:
       network:
         - ["forwarded_port", {guest: 8080, host: 8080}]
-        - ["forwarded_port", {guest: 80, host: 9080}]
+        - ["forwarded_port", {guest: 9080, host: 9080}]
     run_list:
       - recipe[gogs::default]
       - recipe[fake::gogs]
@@ -104,9 +104,9 @@ suites:
       drone:
         agent:
           config:
-            drone_server: ws://10.0.2.15/ws/broker
+            drone_server: ws://10.0.2.15:9080/ws/broker
         config:
-          drone_host: http://10.0.2.15
+          drone_host: http://10.0.2.15:9080
           drone_debug: true
           drone_gogs: true
           drone_gogs_url: http://10.0.2.15:8080
@@ -114,7 +114,12 @@ suites:
         docker:
           daemon:
             log_level: debug
-        # repo: drone/drone
+        server:
+          port: '9080'
         version: '0.6'
       gogs:
+        config:
+          server:
+            DOMAIN: 10.0.2.15
+            HTTP_ADDR: 10.0.2.15
         version: '0.9.97'
