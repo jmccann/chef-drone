@@ -1,0 +1,9 @@
+language: ruby
+cache: bundler
+rvm:
+- 2.1
+bundler_args: "--without integration --deployment --retry 3"
+before_script:
+- bundle exec berks
+script:
+- bundle exec rake travis

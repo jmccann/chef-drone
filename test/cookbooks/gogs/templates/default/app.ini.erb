@@ -1,0 +1,9 @@
+<% @config.each do |section, settings| %>
+<% unless section == 'global' %>
+[<%= section %>]
+<% end %>
+<% settings.each do |key, val| %>
+<%= key %> = <%= val %>
+<% end %>
+
+<% end %>
