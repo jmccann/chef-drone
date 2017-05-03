@@ -15,9 +15,9 @@ end
 describe command("docker logs agent") do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should eq '' }
-  its(:stderr) { should eq '' }
+  its(:stderr) { should include('pipeline: request next execution') }
 end
 describe command("docker logs drone") do
   its(:exit_status) { should eq 0 }
-  its(:stderr) { should include('level=debug msg="Agent 172.17.0.1 connected."') }
+  its(:stderr) { should include('agent connected: ip address 172.17.0.1') }
 end
