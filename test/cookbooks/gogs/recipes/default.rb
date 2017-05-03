@@ -34,7 +34,7 @@ user node['gogs']['config']['global']['RUN_USER'] do
   comment 'Gogs User'
   home "/home/#{node['gogs']['config']['global']['RUN_USER']}"
   shell '/bin/bash'
-  # supports manage_home: true
+  manage_home true
 end
 
 [
