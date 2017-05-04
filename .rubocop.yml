@@ -10,7 +10,7 @@ Encoding:
 StringLiterals:
   Enabled: false
 
-SpaceBeforeFirstArg:
+Style/SpaceBeforeFirstArg:
   Exclude:
     - metadata.rb
 
