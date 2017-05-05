@@ -20,8 +20,6 @@ This cookbook is tested against:
 
 ...but it might work on other platforms.
 
-If installing and managing docker with this cookbook only version 1.11+ is supported.
-
 # Usage
 ## Recipes
 ### drone::default
@@ -30,15 +28,15 @@ Installs the drone server.
 Include `recipe[drone::default]` in your run list.
 
 ### drone::agent
-Installs and sets up the drone agent.  For use with Drone >= 0.5
+Installs and sets up the drone agent.
 
 Include `recipe[drone::agent]` in your run list.
 
 ## Attributes
 
 For Drone ENV config settings see:
-* http://readme.drone.io/setup/overview/#configure - Drone 0.4
-* http://readme.drone.io/0.5/manage/server/ - Drone 0.5
+* http://readme.drone.io/admin/installation-reference/ - Drone 0.5
+* http://docs.drone.io/installation/ - Drone 0.6
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
