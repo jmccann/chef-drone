@@ -66,7 +66,7 @@ this for you but supports being able to do it.
 
 1. Add your cert and private key to the host
   * https://github.com/zuazo/ssl_certificate-cookbook
-1. Expose the certificates to the Drone container using `node['drone']['server']['volumes']`
+2. Expose the certificates to the Drone container using `node['drone']['server']['volumes']`
 ```ruby
 node['drone']['server']['volumes'] = [
   "/var/lib/drone:/var/lib/drone",
@@ -75,12 +75,12 @@ node['drone']['server']['volumes'] = [
   "/etc/ssl/private/drone.key:/etc/ssl/private/drone.key"
 ]
 ```
-1. Configure Drone to use the cert/key pair
+3. Configure Drone to use the cert/key pair
 ```ruby
 node['drone']['config']['drone_server_cert'] = '/etc/ssl/certs/drone.pem'
 node['drone']['config']['drone_server_key'] = '/etc/ssl/private/drone.key'
 ```
-1. Expose Drone service via host port 443
+4. Expose Drone service via host port 443
 ```ruby
 node['drone']['server']['port'] = '443'
 ```
