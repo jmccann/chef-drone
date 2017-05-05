@@ -1,3 +1,6 @@
+puts 'Waiting for gogs to start'
+sleep 5
+
 describe file('/var/lib/drone/drone.sqlite') do
   it { should be_file }
 end
