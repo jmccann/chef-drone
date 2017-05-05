@@ -1,6 +1,3 @@
-
-# NOTE, assuming to switch from default['drone']['docker_*'] to default['docker'][....]
-
 default['drone']['docker']['version'] = nil
 default['drone']['docker']['hosts'] = ['unix:///var/run/docker.sock']
 default['drone']['docker']['log_driver'] = nil
