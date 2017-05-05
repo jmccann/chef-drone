@@ -50,17 +50,6 @@ Attribute | Description | Type | Default
 `node['drone']['config']` | Hash of Drone ENV configuration options | Hash | See [Configuration](#configuration) section below.
 `node['drone']['agent']['config']` | Hash of configuration options for Drone Agent | Hash | See [Configuration](#configuration) section below.
 
-## Configuration
-
-The configuration in Drone 0.4.0 changed from TOML to BASH RC file.
-
-The minimum required attribute is to set following tokens for your "remote" driver (gitlab, github, etc..)
-
-* `node['drone']['config']['oauth_client']`
-* `node['drone']['config']['oauth_secret']`
-
-See the drone documentations and `attributes/default.rb` for more options.
-
 ## Secrets With Chef-Vault
 
 This cookbook supports using secrets from chef-vault.  The vault bag to use
