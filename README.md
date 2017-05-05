@@ -34,10 +34,6 @@ Include `recipe[drone::agent]` in your run list.
 
 ## Attributes
 
-For Drone ENV config settings see:
-* http://readme.drone.io/admin/installation-reference/ - Drone 0.5
-* http://docs.drone.io/installation/ - Drone 0.6
-
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
 `node['drone']['repo']` | Docker repo to pull Drone from | String | `'drone/drone'`
@@ -45,8 +41,24 @@ Attribute | Description | Type | Default
 `node['drone']['server']['port']` | Host port to bind drone to | Integer | `80`
 `node['drone']['server']['volumes']` | Volumes to mount to drone from host | Array | `['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock']`
 `node['drone']['vault']['bag']` | Name of vault with secrets | String | `'vault_drone'`.  See [Vault](#vault) section below.
-`node['drone']['config']` | Hash of Drone ENV configuration options | Hash | See [Configuration](#configuration) section below.
-`node['drone']['agent']['config']` | Hash of configuration options for Drone Agent | Hash | See [Configuration](#configuration) section below.
+`node['drone']['agent']['config']` | Hash of configuration envvars for Drone Agent | Hash | See [Configuration](#configuration) section below.
+`node['drone']['server']['config']` | Hash of configuration envvars for Drone Server | Hash | See [Configuration](#configuration) section below.
+
+## Configuration
+
+Drone is configured by setting certain ENV variables in the agent/server containers.
+
+For Drone ENV config settings see:
+* http://readme.drone.io/admin/installation-reference/ - Drone 0.5
+* http://docs.drone.io/installation/ - Drone 0.6
+
+With this cookbook you can inject ENV variables to your Drone agent/server
+containers by using `node['drone']['agent']['config']`
+and `node['drone']['server']['config']`.  The keys after `config` are the
+ENV variable names and the value you set is the value to assign the
+ENV variable.
+
+You can find examples of this in use in the [.kitchen.yml](.kitchen.yml)
 
 ## Secrets With Chef-Vault
 

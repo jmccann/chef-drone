@@ -2,7 +2,7 @@ module ChefDrone
   # Methods for generating drone container ENV from node attributes
   module Env
     def drone_env
-      env = node['drone']['config'].map { |k, v| "#{k.upcase}=#{v}" }
+      env = node['drone']['server']['config'].map { |k, v| "#{k.upcase}=#{v}" }
       %w(drone_secret drone_github_client drone_github_secret database_config).each do |item|
         env = override_secret env, item
       end

@@ -9,7 +9,7 @@ describe 'drone::default' do
   context 'When all attributes are default, on ubuntu, getting secrets from attribtues' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
-        node.default['drone']['config']['drone_secret'] = "ATTRagentSECRET"
+        node.default['drone']['server']['config']['drone_secret'] = "ATTRagentSECRET"
       end
       runner.converge(described_recipe)
     end
@@ -52,7 +52,7 @@ describe 'drone::default' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, server|
         inject_databags server
-        node.default['drone']['config']['drone_secret'] = "ATTRagentSECRET"
+        node.default['drone']['server']['config']['drone_secret'] = "ATTRagentSECRET"
       end
       runner.converge(described_recipe)
     end
