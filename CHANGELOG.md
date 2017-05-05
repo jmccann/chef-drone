@@ -1,5 +1,17 @@
 Drone Cookbook Changelog
 =========================
+v4.0.0
+------
+* **BREAKING**: Remove support for Drone 0.4
+* **BREAKING**: Remove support for old platforms (Ubuntu 14.x, Centos 6.x)
+  * This allows control docker version on RHEL platforms too now!
+  * May actually still work on older platforms, just not testing for it anymore.
+* **BREAKING**: Remove support for reverse proxy
+  * Can still [configure HTTPS](README.md#https-config)
+* **BREAKING**: Remove SSL cert generation for docker
+* **BREAKING**: Move `node['drone']['config']` -> `node['drone']['server']['config']`
+* Install docker via packages
+
 v3.6.1
 ------
 * Updates to work properly in Chef 13
