@@ -1,4 +1,4 @@
-# Drone cookbook
+# Drone Cookbook
 [![Build Status](https://travis-ci.org/jmccann/chef-drone.svg?branch=master)](https://travis-ci.org/jmccann/chef-drone)
 
 Installs [Drone](https://github.com/drone/drone), a CI server built on [Docker](https://www.docker.io).
