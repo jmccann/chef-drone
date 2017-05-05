@@ -61,12 +61,12 @@ The minimum required attribute is to set following tokens for your "remote" driv
 
 See the drone documentations and `attributes/default.rb` for more options.
 
-## Vault
+## Secrets With Chef-Vault
 
-For [`drone::reverse_proxy`](#drone::reverse_proxy) you need:
-* [certs](test/integration/data_bags/vault_drone/certs.json)
+This cookbook supports using secrets from chef-vault.  The vault bag to use
+is controlled by `node['drone']['vault']['bag']`.  Then the following vault
+items are supported:
 
-Other optional items include:
 * drone_secret
 * drone_github_client
 * drone_github_secret
@@ -75,8 +75,6 @@ Other optional items include:
 ## Docker
 
 See `attributes/docker.rb` for more options.
-
-**Note:** There is no ability to control docker version on RHEL based platforms.
 
 ## Testing
 
