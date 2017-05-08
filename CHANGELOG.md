@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v4.0.1
+------
+* Remove `chef_nginx` and `ssl_certificate` cookbook dependencies.
+
 v4.0.0
 ------
 * **BREAKING**: Remove support for Drone 0.4
