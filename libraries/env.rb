@@ -3,7 +3,7 @@ module ChefDrone
   module Env
     def drone_env
       env = node['drone']['server']['config'].map { |k, v| "#{k.upcase}=#{v}" }
-      %w(drone_secret drone_github_client drone_github_secret database_config).each do |item|
+      %w(drone_secret drone_github_client drone_github_secret database_config drone_database_config).each do |item|
         env = override_secret env, item
       end
       env
