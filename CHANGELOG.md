@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v4.0.2
+------
+* Allow using `drone_database_config` as a secret
+
 v4.0.1
 ------
 * Remove `chef_nginx` and `ssl_certificate` cookbook dependencies.
