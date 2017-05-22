@@ -3,7 +3,7 @@ module ChefDrone
   module Env
     def drone_env
       env = node['drone']['server']['config'].map { |k, v| "#{k.upcase}=#{v}" }
-      %w(drone_secret drone_github_client drone_github_secret database_config drone_database_datasource).each do |item|
+      node['drone']['server']['vault']['items'].each do |item|
         env = override_secret env, item
       end
       env
@@ -11,7 +11,7 @@ module ChefDrone
 
     def agent_env
       env = node['drone']['agent']['config'].map { |k, v| "#{k.upcase}=#{v}" }
-      %w(drone_secret).each do |item|
+      node['drone']['agent']['vault']['items'].each do |item|
         env = override_secret env, item
       end
       env
