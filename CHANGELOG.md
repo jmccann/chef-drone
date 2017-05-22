@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v4.1.0
+------
+* Attributize items to load from vault
+
 v4.0.3
 ------
 * Allow using `drone_database_config` as a secret
