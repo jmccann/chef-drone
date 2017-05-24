@@ -48,7 +48,7 @@ suites:
             DRONE_GITHUB_CLIENT: GH_CLIENT
             DRONE_GITHUB_SECRET: GH_SECRET
 
-  - name: drone-0.5-docker-17.04.0
+  - name: drone-0.5-docker-version
     run_list:
       - recipe[drone::default]
       - recipe[drone::agent]
@@ -62,7 +62,7 @@ suites:
         docker:
           daemon:
             log_level: debug
-          version: '17.04.0'
+          version: '17.05.0'
         server:
           config:
             I_UNDERSTAND_I_AM_USING_AN_UNSTABLE_VERSION: true
@@ -118,6 +118,7 @@ suites:
             drone_gogs: true
             drone_gogs_url: http://10.0.2.15:8080
             drone_open: true
+            drone_server_addr: :9080
           port: '9080'
         version: '0.6'
       gogs:
