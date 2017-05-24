@@ -12,6 +12,7 @@ docker_container 'agent' do
   command 'agent'
   env agent_env
   volumes ['/var/run/docker.sock:/var/run/docker.sock']
+  network_mode node['drone']['agent']['network_mode']
   restart_policy 'always'
   detach true
   log_driver node['drone']['docker']['log_driver'] if node['drone']['docker']['log_driver']

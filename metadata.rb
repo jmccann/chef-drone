@@ -10,7 +10,7 @@ chef_version     '>= 12.0.0'
 version          '4.1.0'
 
 depends 'chef-vault', '~> 1.3'
-depends 'docker', '~> 2.9'
+depends 'docker', '~> 2.15'
 
 supports 'ubuntu', '>= 16.04'
 supports 'centos', '>= 7.1'
