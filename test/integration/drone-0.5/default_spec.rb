@@ -24,8 +24,8 @@ end
 
 # Make sure running in host network mode
 describe command("docker inspect drone") do
-  its(:stdout) { should include('"NetworkMode": "host"') }
+  its(:stdout) { should include('"NetworkMode": "bridge"') }
 end
 describe command("docker inspect agent") do
-  its(:stdout) { should include('"NetworkMode": "host"') }
+  its(:stdout) { should include('"NetworkMode": "bridge"') }
 end
