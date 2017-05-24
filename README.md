@@ -40,7 +40,7 @@ Attribute | Description | Type | Default
 `node['drone']['agent']['vault']['items']` | Array of vault items to load from bag for agents | Array | `['drone_secret']`
 `node['drone']['repo']` | Docker repo to pull Drone from | String | `'drone/drone'`
 `node['drone']['server']['config']` | Hash of configuration envvars for Drone Server | Hash | See [Configuration](#configuration) section below.
-`node['drone']['server']['port']` | Host port to bind drone to | Integer | `80`
+`node['drone']['server']['port']` | Docker port configuration for server.  Binds container 8000 to host 80 by default. | Integer | `80:8000`
 `node['drone']['agent']['vault']['items']` | Array of vault items to load from bag for server | Array | `['database_config' 'drone_database_datasource' 'drone_github_client' 'drone_github_secret' 'drone_license' 'drone_secret']`
 `node['drone']['server']['volumes']` | Volumes to mount to drone from host | Array | `['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock']`
 `node['drone']['vault']['bag']` | Name of vault with secrets | String | `'vault_drone'`.  See [Vault](#vault) section below.
