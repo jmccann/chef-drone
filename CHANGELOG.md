@@ -1,5 +1,12 @@
 Drone Cookbook Changelog
 =========================
+v5.0.0
+------
+* **BREAKING**: The behavior of `node['drone']['server']['port']` has changed slightly.
+Before it was the host port to NAT to the container port.  Now it is the port
+value to pass to `docker_container('drone')` directly.
+* Added ability to set `network_mode` for server and agent.  Default will remain `bridge`.
+
 v4.1.0
 ------
 * Attributize items to load from vault
