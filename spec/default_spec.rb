@@ -78,7 +78,7 @@ describe 'drone::default' do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
         node.normal['drone']['repo'] = 'jmccann/drone'
         node.normal['drone']['version'] = '0.6'
-        node.normal['drone']['server']['port'] = '443'
+        node.normal['drone']['server']['port'] = '443:8000'
         node.normal['drone']['server']['volumes'] = ['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock', '/etc/ssl/certs/drone.pem:/etc/ssl/certs/drone.pem', '/etc/ssl/private/drone.key:/etc/ssl/private/drone.key']
       end
       runner.converge(described_recipe)
