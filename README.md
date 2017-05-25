@@ -94,7 +94,7 @@ node['drone']['config']['drone_server_key'] = '/etc/ssl/private/drone.key'
 ```
 4. Expose Drone service via host port 443
 ```ruby
-node['drone']['server']['port'] = '443'
+node['drone']['server']['port'] = '443:8000'
 ```
 
 ## Docker
