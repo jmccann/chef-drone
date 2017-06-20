@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v5.1.0
+------
+* Parameterize volumes for agent
+
 v5.0.0
 ------
 * **BREAKING**: The behavior of `node['drone']['server']['port']` has changed slightly.
