@@ -17,11 +17,6 @@ describe command("docker logs agent") do
   its(:stderr) { should include('connection established, ready to process builds') }
 end
 
-# Make sure correct docker version installed
-describe command("docker version") do
-  its(:stdout) { should include('Version:      17.04.0-ce') }
-end
-
 # Make sure running in host network mode
 describe command("docker inspect drone") do
   its(:stdout) { should include('"NetworkMode": "bridge"') }
