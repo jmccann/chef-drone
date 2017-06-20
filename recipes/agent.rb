@@ -11,7 +11,7 @@ docker_container 'agent' do
   tag node['drone']['version']
   command 'agent'
   env agent_env
-  volumes ['/var/run/docker.sock:/var/run/docker.sock']
+  volumes node['drone']['agent']['volumes']
   network_mode node['drone']['agent']['network_mode'] if node['drone']['agent']['network_mode']
   restart_policy 'always'
   detach true

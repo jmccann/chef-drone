@@ -64,6 +64,11 @@ describe 'drone::agent' do
         expect(agent_env).to include('DRONE_SECRET=RANDOMagentTOKEN')
       end
     end
+
+    it 'mounts docker socket' do
+      expect(chef_run).to run_docker_container('agent')
+        .with(volumes_binds: ['/var/run/docker.sock:/var/run/docker.sock'])
+    end
   end
 
   context 'When all attributes are default, on ubuntu, getting secrets from vault' do
@@ -71,6 +76,7 @@ describe 'drone::agent' do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
         node.normal['drone']['repo'] = 'jmccann/drone'
         node.normal['drone']['version'] = '0.6'
+        node.normal['drone']['agent']['volumes'] = ['/var/run/docker.sock:/var/run/docker.sock', '/etc/ssl/certs/ca-bundle.pem:/etc/ssl/certs/ca-bundle.pem']
       end
       runner.converge(described_recipe)
     end
@@ -85,6 +91,11 @@ describe 'drone::agent' do
 
     it 'installs a different version of drone' do
       expect(chef_run).to run_docker_container('agent').with(tag: '0.6')
+    end
+
+    it 'mounts specified volumes' do
+      expect(chef_run).to run_docker_container('agent')
+        .with(volumes_binds: ['/var/run/docker.sock:/var/run/docker.sock', '/etc/ssl/certs/ca-bundle.pem:/etc/ssl/certs/ca-bundle.pem'])
     end
   end
 end
