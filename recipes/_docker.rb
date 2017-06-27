@@ -9,3 +9,9 @@ docker_service_manager 'default' do
   retry_delay 20
   storage_driver node['drone']['docker']['storage_driver']
 end
+
+execute 'restart docker' do
+  command 'exit 0'
+  notifies :restart, 'docker_service_manager[default]', :immediate
+  not_if "docker info | grep 'Storage Driver: #{node['drone']['docker']['storage_driver']}'"
+end

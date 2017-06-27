@@ -14,6 +14,10 @@ describe 'drone::default' do
       runner.converge(described_recipe)
     end
 
+    before do
+      stub_command("docker info | grep 'Storage Driver: aufs'").and_return false
+    end
+
     it 'converges successfully' do
       chef_run # This should not raise an error
     end
@@ -57,6 +61,10 @@ describe 'drone::default' do
       runner.converge(described_recipe)
     end
 
+    before do
+      stub_command("docker info | grep 'Storage Driver: aufs'").and_return false
+    end
+
     it 'converges successfully' do
       chef_run # This should not raise an error
     end
@@ -82,6 +90,10 @@ describe 'drone::default' do
         node.normal['drone']['server']['volumes'] = ['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock', '/etc/ssl/certs/drone.pem:/etc/ssl/certs/drone.pem', '/etc/ssl/private/drone.key:/etc/ssl/private/drone.key']
       end
       runner.converge(described_recipe)
+    end
+
+    before do
+      stub_command("docker info | grep 'Storage Driver: aufs'").and_return false
     end
 
     it 'converges successfully' do

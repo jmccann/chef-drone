@@ -14,6 +14,10 @@ describe 'drone::agent' do
       runner.converge(described_recipe)
     end
 
+    before do
+      stub_command("docker info | grep 'Storage Driver: aufs'").and_return false
+    end
+
     it 'converges successfully' do
       chef_run # This should not raise an error
     end
@@ -50,6 +54,10 @@ describe 'drone::agent' do
       runner.converge(described_recipe)
     end
 
+    before do
+      stub_command("docker info | grep 'Storage Driver: aufs'").and_return false
+    end
+
     it 'converges successfully' do
       chef_run # This should not raise an error
     end
@@ -79,6 +87,10 @@ describe 'drone::agent' do
         node.normal['drone']['agent']['volumes'] = ['/var/run/docker.sock:/var/run/docker.sock', '/etc/ssl/certs/ca-bundle.pem:/etc/ssl/certs/ca-bundle.pem']
       end
       runner.converge(described_recipe)
+    end
+
+    before do
+      stub_command("docker info | grep 'Storage Driver: aufs'").and_return false
     end
 
     it 'converges successfully' do

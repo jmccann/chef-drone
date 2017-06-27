@@ -12,6 +12,10 @@ describe 'drone::_docker' do
       runner.converge(described_recipe)
     end
 
+    before do
+      stub_command("docker info | grep 'Storage Driver: aufs'").and_return false
+    end
+
     it 'converges successfully' do
       chef_run # This should not raise an error
     end
@@ -38,6 +42,10 @@ describe 'drone::_docker' do
       runner.converge(described_recipe)
     end
 
+    before do
+      stub_command("docker info | grep 'Storage Driver: aufs'").and_return false
+    end
+
     it 'converges successfully' do
       chef_run # This should not raise an error
     end
@@ -55,6 +63,10 @@ describe 'drone::_docker' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'redhat', version: '7.2')
       runner.converge(described_recipe)
+    end
+
+    before do
+      stub_command("docker info | grep 'Storage Driver: devicemapper'").and_return false
     end
 
     it 'converges successfully' do
@@ -81,6 +93,10 @@ describe 'drone::_docker' do
         node.override['drone']['docker']['daemon']['log_level'] = 'debug'
       end
       runner.converge(described_recipe)
+    end
+
+    before do
+      stub_command("docker info | grep 'Storage Driver: devicemapper'").and_return false
     end
 
     it 'converges successfully' do
