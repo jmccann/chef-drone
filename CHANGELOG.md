@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v5.1.1
+------
+* Properly load defined storage driver by restarting Docker if currently not loaded
+
 v5.1.0
 ------
 * Parameterize volumes for agent
