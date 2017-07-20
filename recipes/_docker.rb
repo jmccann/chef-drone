@@ -8,6 +8,8 @@ docker_service_manager 'default' do
   retries 1
   retry_delay 20
   storage_driver node['drone']['docker']['storage_driver']
+  fixed_cidr node['drone']['docker']['cidr_v4'] if node['drone']['docker']['cidr_v4']
+  fixed_cidr_v6 node['drone']['docker']['cidr_v6'] if node['drone']['docker']['cidr_v6']
 end
 
 execute 'restart docker' do
