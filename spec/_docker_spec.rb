@@ -38,6 +38,7 @@ describe 'drone::_docker' do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
         node.override['drone']['docker']['version'] = '17.04.0'
         node.override['drone']['docker']['daemon']['log_level'] = 'debug'
+        node.override['drone']['docker']['cidr_v4'] = '192.168.0.0/16'
       end
       runner.converge(described_recipe)
     end
@@ -56,6 +57,10 @@ describe 'drone::_docker' do
 
     it 'sets docker logging to debug' do
       expect(chef_run).to start_docker_service_manager('default').with(log_level: :debug)
+    end
+
+    it 'sets docker subnet to 192.168.0.0/16' do
+      expect(chef_run).to start_docker_service_manager('default').with(fixed_cidr: '192.168.0.0/16')
     end
   end
 
@@ -91,6 +96,7 @@ describe 'drone::_docker' do
       runner = ChefSpec::ServerRunner.new(platform: 'redhat', version: '7.2') do |node, _server|
         node.override['drone']['docker']['version'] = '17.04.0'
         node.override['drone']['docker']['daemon']['log_level'] = 'debug'
+        node.override['drone']['docker']['cidr_v4'] = '192.168.0.0/16'
       end
       runner.converge(described_recipe)
     end
@@ -109,6 +115,10 @@ describe 'drone::_docker' do
 
     it 'sets docker logging to debug' do
       expect(chef_run).to start_docker_service_manager('default').with(log_level: :debug)
+    end
+
+    it 'sets docker subnet to 192.168.0.0/16' do
+      expect(chef_run).to start_docker_service_manager('default').with(fixed_cidr: '192.168.0.0/16')
     end
   end
 end
