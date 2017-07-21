@@ -18,9 +18,7 @@ end
 
 # No logs from agent (meaning no errors)
 log_file = "/var/log/syslog"
-if os[:family] == "redhat"
-  log_file = "/var/log/messages"
-end
+log_file = "/var/log/messages" if os[:family] == "redhat"
 
 describe file(log_file) do
   # its(:exit_status) { should eq 0 }
@@ -38,12 +36,4 @@ describe command("docker inspect drone") do
 end
 describe command("docker inspect agent") do
   its(:stdout) { should include('"NetworkMode": "host"') }
-end
-
-describe command("route -n") do
-  its(:stdout) { should include('192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 docker0') }
-end
-
-describe command("ip a show dev docker0") do
-  its(:stdout) { should include('inet 192.168.1.1/24') }
 end
