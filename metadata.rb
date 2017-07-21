@@ -7,7 +7,7 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 source_url       'https://github.com/jmccann/chef-drone'
 issues_url       'https://github.com/jmccann/chef-drone/issues'
 chef_version     '>= 12.0.0'
-version          '5.1.1'
+version          '5.2.0'
 
 depends 'chef-vault', '~> 1.3'
 depends 'docker', '~> 2.15'

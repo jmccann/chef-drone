@@ -1,5 +1,9 @@
 Drone Cookbook Changelog
 =========================
+v5.2.0
+------
+* Allow specifying `bip` for docker service
+
 v5.1.1
 ------
 * Properly load defined storage driver by restarting Docker if currently not loaded
