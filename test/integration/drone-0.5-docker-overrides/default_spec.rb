@@ -29,3 +29,11 @@ end
 describe command("docker inspect agent") do
   its(:stdout) { should include('"NetworkMode": "host"') }
 end
+
+describe command("route -n") do
+  its(:stdout) { should include('192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 docker0') }
+end
+
+describe command("ip a show dev docker0") do
+  its(:stdout) { should include('inet 192.168.1.1/24') }
+end
