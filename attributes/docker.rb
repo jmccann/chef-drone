@@ -1,5 +1,6 @@
 default['drone']['docker']['version'] = nil
 default['drone']['docker']['hosts'] = ['unix:///var/run/docker.sock']
+default['drone']['docker']['bridge_ip'] = nil
 default['drone']['docker']['cidr_v4'] = nil
 default['drone']['docker']['cidr_v6'] = nil
 default['drone']['docker']['log_driver'] = nil
