@@ -61,6 +61,8 @@ suites:
             drone_server: ws://10.0.2.15/ws/broker
           network_mode: host
         docker:
+          bridge_ip: 192.168.1.1/24
+          cidr_v4: 192.168.0.0/16
           daemon:
             log_level: debug
           version: '17.05.0'
