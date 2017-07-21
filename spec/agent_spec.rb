@@ -85,6 +85,8 @@ describe 'drone::agent' do
         node.normal['drone']['repo'] = 'jmccann/drone'
         node.normal['drone']['version'] = '0.6'
         node.normal['drone']['agent']['volumes'] = ['/var/run/docker.sock:/var/run/docker.sock', '/etc/ssl/certs/ca-bundle.pem:/etc/ssl/certs/ca-bundle.pem']
+        node.normal['drone']['docker']['log_driver'] = 'syslog'
+        node.normal['drone']['docker']['log_opts'] = 'tag=myapp'
       end
       runner.converge(described_recipe)
     end
@@ -108,6 +110,11 @@ describe 'drone::agent' do
     it 'mounts specified volumes' do
       expect(chef_run).to run_docker_container('agent')
         .with(volumes_binds: ['/var/run/docker.sock:/var/run/docker.sock', '/etc/ssl/certs/ca-bundle.pem:/etc/ssl/certs/ca-bundle.pem'])
+    end
+
+    it 'uses custom logging' do
+      expect(chef_run).to run_docker_container('agent')
+        .with(log_driver: 'syslog', log_opts: { 'tag' => 'myapp' })
     end
   end
 end

@@ -24,11 +24,16 @@ platforms:
     run_list:
       - recipe[yum-epel::default]
       - recipe[chef-yum-docker::default]
+    attributes:
+      jmccann-docker-host:
+        docker:
+          service:
+            storage_opts: overlay2.override_kernel_check=1
 
 suites:
   - name: drone-0.5
     run_list:
-      - recipe[drone::default]
+      - recipe[drone::standalone_server]
       - recipe[drone::agent]
     attributes:
       drone:
@@ -37,9 +42,9 @@ suites:
             I_UNDERSTAND_I_AM_USING_AN_UNSTABLE_VERSION: true
             I_AGREE_TO_FIX_BUGS_AND_NOT_FILE_BUGS: true
             drone_server: ws://10.0.2.15/ws/broker
-        docker:
-          daemon:
-            log_level: debug
+        # docker:
+        #   daemon:
+        #     log_level: debug
         server:
           config:
             I_UNDERSTAND_I_AM_USING_AN_UNSTABLE_VERSION: true
@@ -50,7 +55,7 @@ suites:
 
   - name: drone-0.5-docker-overrides
     run_list:
-      - recipe[drone::default]
+      - recipe[drone::standalone_server]
       - recipe[drone::agent]
     attributes:
       drone:
@@ -61,11 +66,7 @@ suites:
             drone_server: ws://10.0.2.15/ws/broker
           network_mode: host
         docker:
-          bridge_ip: 192.168.1.1/24
-          cidr_v4: 192.168.0.0/16
-          daemon:
-            log_level: debug
-          version: '17.05.0'
+          log_driver: syslog
         server:
           config:
             I_UNDERSTAND_I_AM_USING_AN_UNSTABLE_VERSION: true
@@ -79,16 +80,16 @@ suites:
 
   - name: drone-0.6
     run_list:
-      - recipe[drone::default]
+      - recipe[drone::standalone_server]
       - recipe[drone::agent]
     attributes:
       drone:
         agent:
           config:
             drone_server: ws://10.0.2.15/ws/broker
-        docker:
-          daemon:
-            log_level: debug
+        # docker:
+        #   daemon:
+        #     log_level: debug
         server:
           config:
             DRONE_HOST: http://10.0.2.15
@@ -107,16 +108,16 @@ suites:
     run_list:
       - recipe[gogs::default]
       - recipe[fake::gogs]
-      - recipe[drone::default]
+      - recipe[drone::standalone_server]
       - recipe[drone::agent]
     attributes:
       drone:
         agent:
           config:
             drone_server: ws://10.0.2.15:9080/ws/broker
-        docker:
-          daemon:
-            log_level: debug
+        # docker:
+        #   daemon:
+        #     log_level: debug
         server:
           config:
             drone_host: http://10.0.2.15:9080

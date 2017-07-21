@@ -11,10 +11,20 @@ describe command("wget -q --no-check-certificate http://localhost") do
   its(:exit_status) { should eq 0 }
 end
 
-# No logs from agent (meaning no errors)
+# Should be logging to syslog
 describe command("docker logs agent") do
-  its(:exit_status) { should eq 0 }
-  its(:stderr) { should include('connection established, ready to process builds') }
+  its(:exit_status) { should eq 1 }
+end
+
+# No logs from agent (meaning no errors)
+log_file = "/var/log/syslog"
+if os[:family] == "redhat"
+  log_file = "/var/log/messages"
+end
+
+describe file(log_file) do
+  # its(:exit_status) { should eq 0 }
+  its(:content) { should include('connection established, ready to process builds') }
 end
 
 # Make sure correct docker version installed

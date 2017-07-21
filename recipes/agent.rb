@@ -1,5 +1,4 @@
 include_recipe 'chef-vault::default'
-include_recipe 'drone::_docker'
 
 docker_image 'agent' do
   repo node['drone']['repo']
@@ -15,7 +14,11 @@ docker_container 'agent' do
   network_mode node['drone']['agent']['network_mode'] if node['drone']['agent']['network_mode']
   restart_policy 'always'
   detach true
-  log_driver node['drone']['docker']['log_driver'] if node['drone']['docker']['log_driver']
-  log_opts node['drone']['docker']['log_opts']
   sensitive true
+
+  if node['drone']['docker']
+    node['drone']['docker'].each do |k, v|
+      send(k, v)
+    end
+  end
 end

@@ -1,11 +1,11 @@
 #
 # Cookbook Name:: drone
-# Spec:: default
+# Spec:: server
 #
 
 require 'spec_helper'
 
-describe 'drone::default' do
+describe 'drone::server' do
   context 'When all attributes are default, on ubuntu, getting secrets from attribtues' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
@@ -88,6 +88,8 @@ describe 'drone::default' do
         node.normal['drone']['version'] = '0.6'
         node.normal['drone']['server']['port'] = '443:8000'
         node.normal['drone']['server']['volumes'] = ['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock', '/etc/ssl/certs/drone.pem:/etc/ssl/certs/drone.pem', '/etc/ssl/private/drone.key:/etc/ssl/private/drone.key']
+        node.normal['drone']['docker']['log_driver'] = 'syslog'
+        node.normal['drone']['docker']['log_opts'] = 'tag=myapp'
       end
       runner.converge(described_recipe)
     end
@@ -117,6 +119,11 @@ describe 'drone::default' do
         .with(volumes_binds: ['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock',
                               '/etc/ssl/certs/drone.pem:/etc/ssl/certs/drone.pem',
                               '/etc/ssl/private/drone.key:/etc/ssl/private/drone.key'])
+    end
+
+    it 'uses custom logging' do
+      expect(chef_run).to run_docker_container('drone')
+        .with(log_driver: 'syslog', log_opts: { 'tag' => 'myapp' })
     end
   end
 end

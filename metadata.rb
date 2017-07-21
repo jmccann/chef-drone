@@ -9,8 +9,9 @@ issues_url       'https://github.com/jmccann/chef-drone/issues'
 chef_version     '>= 12.0.0'
 version          '5.2.0'
 
-depends 'chef-vault', '~> 1.3'
+depends 'chef-vault', '~> 2.1'
 depends 'docker', '~> 2.15'
+depends 'jmccann-docker-host', '3.0'
 
 supports 'ubuntu', '>= 16.04'
 supports 'centos', '>= 7.1'
