@@ -24,7 +24,7 @@ describe 'drone::server' do
 
     it 'creates drone container' do
       expect(chef_run).to run_docker_container('drone')
-        .with(repo: 'drone/drone', tag: '0.5', port: '80:8000',
+        .with(repo: 'drone/drone', tag: '0.8', port: ['80:8000', '9000:9000'],
               volumes_binds: ['/var/lib/drone:/var/lib/drone',
                               '/var/run/docker.sock:/var/run/docker.sock'])
     end
@@ -84,9 +84,9 @@ describe 'drone::server' do
   context 'When attributes are set, on ubuntu' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
-        node.normal['drone']['repo'] = 'jmccann/drone'
+        node.normal['drone']['server']['repo'] = 'jmccann/drone'
         node.normal['drone']['version'] = '0.6'
-        node.normal['drone']['server']['port'] = '443:8000'
+        node.normal['drone']['server']['port'] = ['443:8000', '9001:9000']
         node.normal['drone']['server']['volumes'] = ['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock', '/etc/ssl/certs/drone.pem:/etc/ssl/certs/drone.pem', '/etc/ssl/private/drone.key:/etc/ssl/private/drone.key']
         node.normal['drone']['docker']['log_driver'] = 'syslog'
         node.normal['drone']['docker']['log_opts'] = 'tag=myapp'
@@ -111,7 +111,7 @@ describe 'drone::server' do
     end
 
     it 'runs drone on a different port' do
-      expect(chef_run).to run_docker_container('drone').with(port: '443:8000')
+      expect(chef_run).to run_docker_container('drone').with(port: ['443:8000', '9001:9000'])
     end
 
     it 'runs drone with different volumes' do

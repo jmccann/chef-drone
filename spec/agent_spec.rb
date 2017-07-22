@@ -23,7 +23,12 @@ describe 'drone::agent' do
     end
 
     it 'creates agent container' do
-      expect(chef_run).to run_docker_container('agent').with(repo: 'drone/drone', tag: '0.5')
+      expect(chef_run).to run_docker_container('agent').with(repo: 'drone/agent', tag: '0.8')
+    end
+
+    it 'mounts docker socket' do
+      expect(chef_run).to run_docker_container('agent')
+        .with(volumes_binds: ['/var/run/docker.sock:/var/run/docker.sock'])
     end
 
     describe 'agent container environment' do
@@ -32,7 +37,7 @@ describe 'drone::agent' do
       end
 
       it 'sets DRONE_SERVER from attribute' do
-        expect(agent_env).to include('DRONE_SERVER=ws://localhost/ws/broker')
+        expect(agent_env).to include('DRONE_SERVER=localhost:9000')
       end
 
       it 'sets DRONE_TOKEN from attribute' do
@@ -72,17 +77,12 @@ describe 'drone::agent' do
         expect(agent_env).to include('DRONE_SECRET=RANDOMagentTOKEN')
       end
     end
-
-    it 'mounts docker socket' do
-      expect(chef_run).to run_docker_container('agent')
-        .with(volumes_binds: ['/var/run/docker.sock:/var/run/docker.sock'])
-    end
   end
 
-  context 'When all attributes are default, on ubuntu, getting secrets from vault' do
+  context 'When attributes are overridden, on ubuntu, getting secrets from vault' do
     cached(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
-        node.normal['drone']['repo'] = 'jmccann/drone'
+        node.normal['drone']['agent']['repo'] = 'jmccann/agent'
         node.normal['drone']['version'] = '0.6'
         node.normal['drone']['agent']['volumes'] = ['/var/run/docker.sock:/var/run/docker.sock', '/etc/ssl/certs/ca-bundle.pem:/etc/ssl/certs/ca-bundle.pem']
         node.normal['drone']['docker']['log_driver'] = 'syslog'
@@ -100,7 +100,7 @@ describe 'drone::agent' do
     end
 
     it 'installs drone from a different repo' do
-      expect(chef_run).to run_docker_container('agent').with(repo: 'jmccann/drone')
+      expect(chef_run).to run_docker_container('agent').with(repo: 'jmccann/agent')
     end
 
     it 'installs a different version of drone' do

@@ -16,3 +16,11 @@ describe command("docker logs agent") do
   its(:exit_status) { should eq 0 }
   its(:stderr) { should include('pipeline: request next execution') }
 end
+
+# Make sure running in host network mode
+describe command("docker inspect drone") do
+  its(:stdout) { should include('"NetworkMode": "bridge"') }
+end
+describe command("docker inspect agent") do
+  its(:stdout) { should include('"NetworkMode": "bridge"') }
+end

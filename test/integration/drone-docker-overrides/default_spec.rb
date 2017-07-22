@@ -11,16 +11,23 @@ describe command("wget -q --no-check-certificate http://localhost") do
   its(:exit_status) { should eq 0 }
 end
 
-# No logs from agent (meaning no errors)
+# Should be logging to syslog
 describe command("docker logs agent") do
-  its(:exit_status) { should eq 0 }
-  its(:stderr) { should include('connection established, ready to process builds') }
+  its(:exit_status) { should eq 1 }
+end
+
+# No logs from agent (meaning no errors)
+log_file = "/var/log/syslog"
+log_file = "/var/log/messages" if os[:family] == "redhat"
+
+describe file(log_file) do
+  its(:content) { should include('pipeline: request next execution') }
 end
 
 # Make sure running in host network mode
 describe command("docker inspect drone") do
-  its(:stdout) { should include('"NetworkMode": "bridge"') }
+  its(:stdout) { should include('"NetworkMode": "host"') }
 end
 describe command("docker inspect agent") do
-  its(:stdout) { should include('"NetworkMode": "bridge"') }
+  its(:stdout) { should include('"NetworkMode": "host"') }
 end
