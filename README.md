@@ -3,7 +3,7 @@
 
 Installs [Drone](https://github.com/drone/drone), a CI server built on [Docker](https://www.docker.io).
 
-More information also @ http://readme.drone.io.
+More information also @ http://docs.drone.io.
 
 # Requirements
 
@@ -22,40 +22,53 @@ This cookbook is tested against:
 
 # Usage
 ## Recipes
-### drone::default
-Installs the drone server.
-
-Include `recipe[drone::default]` in your run list.
 
 ### drone::agent
-Installs and sets up the drone agent.
+Installs and sets up the drone agent.  Assumes you have already setup and configured docker.
 
 Include `recipe[drone::agent]` in your run list.
+
+### drone::server
+Installs the drone server.  Assumes you have already setup and configured docker.
+
+Include `recipe[drone::server]` in your run list.
+
+### drone::standalone_agent
+Installs the drone agent.
+Also will install and configure docker with [jmccann-docker-host cookbook](https://github.com/jmccann/jmccann-docker-host-cookbook).
+
+Include `recipe[drone::standalone_agent]` in your run list.
+
+### drone::standalone_server
+Installs the drone server.
+Also will install and configure docker with [jmccann-docker-host cookbook](https://github.com/jmccann/jmccann-docker-host-cookbook).
+
+Include `recipe[drone::standalone_server]` in your run list.
 
 ## Attributes
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
 `node['drone']['agent']['config']` | Hash of configuration envvars for Drone Agent | Hash | See [Configuration](#configuration) section below.
+`node['drone']['agent']['repo']` | Docker repo to pull Drone Agent from | String | `'drone/agent'`
 `node['drone']['agent']['network_mode']` | What network mode to start Drone agent with. Default from Docker is `bridge`. | String | `nil`
 `node['drone']['agent']['vault']['items']` | Array of vault items to load from bag for agents | Array | `['drone_secret']`
 `node['drone']['agent']['volumes']` | Volumes to mount to drone from host for agent | Array | `['/var/run/docker.sock:/var/run/docker.sock']`
-`node['drone']['repo']` | Docker repo to pull Drone from | String | `'drone/drone'`
 `node['drone']['server']['config']` | Hash of configuration envvars for Drone Server | Hash | See [Configuration](#configuration) section below.
 `node['drone']['server']['network_mode']` | What network mode to start Drone server with. Default from Docker is `bridge`. | String | `nil`
-`node['drone']['server']['port']` | Docker port configuration for server.  Binds container 8000 to host 80 by default. | Integer | `80:8000`
-`node['drone']['agent']['vault']['items']` | Array of vault items to load from bag for server | Array | `['database_config' 'drone_database_datasource' 'drone_github_client' 'drone_github_secret' 'drone_license' 'drone_secret']`
+`node['drone']['server']['port']` | Docker port configuration for server.  Binds container 8000 to host 80 and exposes port 9000 by default. | Array | `['80:8000', '9000:9000']`
+`node['drone']['server']['repo']` | Docker repo to pull Drone Server from | String | `'drone/drone'`
+`node['drone']['server']['vault']['items']` | Array of vault items to load from bag for server | Array | `['database_config' 'drone_database_datasource' 'drone_github_client' 'drone_github_secret' 'drone_license' 'drone_secret']`
 `node['drone']['server']['volumes']` | Volumes to mount to drone from host for server | Array | `['/var/lib/drone:/var/lib/drone', '/var/run/docker.sock:/var/run/docker.sock']`
 `node['drone']['vault']['bag']` | Name of vault with secrets | String | `'vault_drone'`.  See [Vault](#vault) section below.
-`node['drone']['version']` | Version of Drone | String | `'0.5'`
+`node['drone']['version']` | Version of Drone | String | `'0.8'`
 
 ## Configuration
 
 Drone is configured by setting certain ENV variables in the agent/server containers.
 
 For Drone ENV config settings see:
-* http://readme.drone.io/admin/installation-reference/ - Drone 0.5
-* http://docs.drone.io/installation/ - Drone 0.6
+* http://docs.drone.io/installation/ - Drone 0.8
 
 With this cookbook you can inject ENV variables to your Drone agent/server
 containers by using `node['drone']['agent']['config']`
