@@ -1,5 +1,16 @@
 Drone Cookbook Changelog
 =========================
+
+v6.0.0
+------
+* **BREAKING**: Does not support versions of Drone older then 0.8.0 now.
+* **BREAKING**: `recipe[drone::default]` renamed to `recipe[drone::server]`
+* **BREAKING**: Does not manage docker install by default anymore.  New *standalone* recipes
+included for that functionality now.
+* **BREAKING**: `node['drone']['repo']` seperated for agent (`node['drone']['agent']['repo']`) and server (`node['drone']['server']['repo']`).
+* **BREAKING**: Probably other breaking changes.  Be sure to test this in a new environment.
+* Supports Drone 0.8.0
+
 v5.2.0
 ------
 * Allow specifying `bip` for docker service
