@@ -92,7 +92,7 @@ suites:
             drone_gogs: true
             drone_gogs_url: http://10.0.2.15:8080
             drone_open: true
-          port: '9080:8000'
+          port: ['9080:8000','9000:9000']
       gogs:
         config:
           server:
